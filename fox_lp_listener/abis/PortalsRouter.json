@@ -1,0 +1,17 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": false, "internalType": "address", "name": "inputToken", "type": "address" },
+      { "indexed": false, "internalType": "uint256", "name": "inputAmount", "type": "uint256" },
+      { "indexed": false, "internalType": "address", "name": "outputToken", "type": "address" },
+      { "indexed": false, "internalType": "uint256", "name": "outputAmount", "type": "uint256" },
+      { "indexed": true, "internalType": "address", "name": "sender", "type": "address" },
+      { "indexed": true, "internalType": "address", "name": "broadcaster", "type": "address" },
+      { "indexed": false, "internalType": "address", "name": "recipient", "type": "address" },
+      { "indexed": true, "internalType": "address", "name": "partner", "type": "address" }
+    ],
+    "name": "Portal",
+    "type": "event"
+  }
+] 

@@ -1,0 +1,13 @@
+nohup: ignoring input
+2025-07-08 16:00:42,739 - INFO - Starting comprehensive ShapeShift affiliate fee tracker
+2025-07-08 16:00:42,739 - INFO - This will collect data from EVM, Chainflip, and THORChain
+2025-07-08 16:00:42,742 - INFO - Comprehensive affiliate fee database setup complete
+2025-07-08 16:00:42,742 - INFO - Starting EVM listener...
+2025-07-08 16:00:43,172 - INFO - Starting ShapeShift affiliate fee tracker (progress version)
+2025-07-08 16:00:43,172 - INFO - Progress will be displayed in real-time...
+2025-07-08 16:00:43,172 - INFO - Progress affiliate fee database setup complete
+2025-07-08 16:00:43,172 - INFO - Processing chain 1
+2025-07-08 16:00:46,898 - ERROR - Error processing chain 1: 401 Client Error: Unauthorized for url: https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161
+2025-07-08 16:00:46,899 - INFO - Processing chain 137
+2025-07-08 16:00:47,031 - INFO - Chain 137: Split into 576 chunks from 73718765 to 73747565
+Progress: 10/576 blocks (1.7%) | Rate: 0.2 blocks/sec | CowSwap: 0 | 0x: 2 | Affiliate: 0 | Elapsed: 47sProgress: 20/576 blocks (3.5%) | Rate: 0.3 blocks/sec | CowSwap: 5 | 0x: 2 | Affiliate: 0 | Elapsed: 71sProgress: 30/576 blocks (5.2%) | Rate: 0.3 blocks/sec | CowSwap: 10 | 0x: 3 | Affiliate: 0 | Elapsed: 115sProgress: 40/576 blocks (6.9%) | Rate: 0.3 blocks/sec | CowSwap: 10 | 0x: 4 | Affiliate: 0 | Elapsed: 142sProgress: 50/576 blocks (8.7%) | Rate: 0.3 blocks/sec | CowSwap: 10 | 0x: 6 | Affiliate: 0 | Elapsed: 174s

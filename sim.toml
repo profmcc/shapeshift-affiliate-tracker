@@ -1,0 +1,224 @@
+[app]
+name = "shapeshift-affiliate-tracker"
+
+# Ethereum Mainnet Contracts
+[[contracts]]
+name = "ZeroExExchangeProxy"
+address = "0xDef1C0ded9bec7F1a1670819833240f027b25EfF"
+chain_id = 1
+abi = "abis/ZeroExExchangeProxy.json"
+
+[[contracts]]
+name = "GPv2Settlement"
+address = "0x9008D19f58AAbD9eD0D60971565AA8510560ab41"
+chain_id = 1
+abi = "abis/GPv2Settlement.json"
+
+[[contracts]]
+name = "PortalsRouter"
+address = "0xbf5A7F3629fB325E2a8453D595AB103465F75E62"
+chain_id = 1
+abi = "abis/PortalsRouter.json"
+
+[[contracts]]
+name = "UniswapV3Factory"
+address = "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+chain_id = 1
+abi = "abis/UniswapV3Factory.json"
+
+# Major Uniswap V2 Pairs - Ethereum
+[[contracts]]
+name = "UniswapV2Pair"
+address = "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc"
+chain_id = 1
+abi = "abis/UniswapV2Pair.json"
+
+[[contracts]]
+name = "UniswapV2Pair"
+address = "0x470e8de2eBaef52014A47Cb5E6aF86884947F08c"
+chain_id = 1
+abi = "abis/UniswapV2Pair.json"
+
+[[contracts]]
+name = "UniswapV2Pair"
+address = "0x2fDbAdf3C4D5A8666Bc06645B8358ab803996E28"
+chain_id = 1
+abi = "abis/UniswapV2Pair.json"
+
+# Uniswap V3 Pool for LP tracking
+[[contracts]]
+name = "UniswapV3Pool"
+address = "0x470e8de2eBaef52014A47Cb5E6aF86884947F08c"
+chain_id = 1
+abi = "abis/UniswapV3Pool.json"
+
+# Major Uniswap V3 Pools - Ethereum
+[[contracts]]
+name = "UniswapV3Pool"
+address = "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640"
+chain_id = 1
+abi = "abis/UniswapV3Pool.json"
+
+[[contracts]]
+name = "UniswapV3Pool"
+address = "0x4e68Ccd3E89f51C3074ca5072bbAC773960dFa36"
+chain_id = 1
+abi = "abis/UniswapV3Pool.json"
+
+[[contracts]]
+name = "UniswapV3Pool"
+address = "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8"
+chain_id = 1
+abi = "abis/UniswapV3Pool.json"
+
+# Polygon Contracts
+[[contracts]]
+name = "ZeroExExchangeProxy"
+address = "0xDef1C0ded9bec7F1a1670819833240f027b25EfF"
+chain_id = 137
+abi = "abis/ZeroExExchangeProxy.json"
+
+[[contracts]]
+name = "GPv2Settlement"
+address = "0x9008D19f58AAbD9eD0D60971565AA8510560ab41"
+chain_id = 137
+abi = "abis/GPv2Settlement.json"
+
+[[contracts]]
+name = "UniswapV3Factory"
+address = "0x0227628f3F023bb0B980b67D528571c95c6DaC1c"
+chain_id = 137
+abi = "abis/UniswapV3Factory.json"
+
+# Major Uniswap V2 Pairs - Polygon
+[[contracts]]
+name = "UniswapV2Pair"
+address = "0x6e7a5FAFcec6BB1e78bAE2A1F0B612012BF14827"
+chain_id = 137
+abi = "abis/UniswapV2Pair.json"
+
+[[contracts]]
+name = "UniswapV2Pair"
+address = "0x34965ba0ac2451A34a0471F04CCa3F990b8dea27"
+chain_id = 137
+abi = "abis/UniswapV2Pair.json"
+
+# Optimism Contracts
+[[contracts]]
+name = "ZeroExExchangeProxy"
+address = "0xDef1C0ded9bec7F1a1670819833240f027b25EfF"
+chain_id = 10
+abi = "abis/ZeroExExchangeProxy.json"
+
+[[contracts]]
+name = "GPv2Settlement"
+address = "0x9008D19f58AAbD9eD0D60971565AA8510560ab41"
+chain_id = 10
+abi = "abis/GPv2Settlement.json"
+
+[[contracts]]
+name = "UniswapV3Factory"
+address = "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+chain_id = 10
+abi = "abis/UniswapV3Factory.json"
+
+# Arbitrum Contracts
+[[contracts]]
+name = "ZeroExExchangeProxy"
+address = "0xDef1C0ded9bec7F1a1670819833240f027b25EfF"
+chain_id = 42161
+abi = "abis/ZeroExExchangeProxy.json"
+
+[[contracts]]
+name = "GPv2Settlement"
+address = "0x9008D19f58AAbD9eD0D60971565AA8510560ab41"
+chain_id = 42161
+abi = "abis/GPv2Settlement.json"
+
+[[contracts]]
+name = "UniswapV3Factory"
+address = "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+chain_id = 42161
+abi = "abis/UniswapV3Factory.json"
+
+# Major Uniswap V2 Pairs - Arbitrum
+[[contracts]]
+name = "UniswapV2Pair"
+address = "0x5f6ce0ca13b87bd738519545d3e018e70e339c24"
+chain_id = 42161
+abi = "abis/UniswapV2Pair.json"
+
+# Base Contracts
+[[contracts]]
+name = "ZeroExExchangeProxy"
+address = "0xDef1C0ded9bec7F1a1670819833240f027b25EfF"
+chain_id = 8453
+abi = "abis/ZeroExExchangeProxy.json"
+
+[[contracts]]
+name = "GPv2Settlement"
+address = "0x9008D19f58AAbD9eD0D60971565AA8510560ab41"
+chain_id = 8453
+abi = "abis/GPv2Settlement.json"
+
+[[contracts]]
+name = "UniswapV3Factory"
+address = "0x33128a8fC17869897dcE68Ed026d694621f6FDfD"
+chain_id = 8453
+abi = "abis/UniswapV3Factory.json"
+
+# Major Uniswap V2 Pairs - Base
+[[contracts]]
+name = "UniswapV2Pair"
+address = "0x4C36388bE6F416A29C8d8ED537538b8e4e5e8B52"
+chain_id = 8453
+abi = "abis/UniswapV2Pair.json"
+
+# Avalanche Contracts
+[[contracts]]
+name = "ZeroExExchangeProxy"
+address = "0xDef1C0ded9bec7F1a1670819833240f027b25EfF"
+chain_id = 43114
+abi = "abis/ZeroExExchangeProxy.json"
+
+[[contracts]]
+name = "UniswapV3Factory"
+address = "0x0227628f3F023bb0B980b67D528571c95c6DaC1c"
+chain_id = 43114
+abi = "abis/UniswapV3Factory.json"
+
+# Major Uniswap V2 Pairs - Avalanche
+[[contracts]]
+name = "UniswapV2Pair"
+address = "0x2b4C76d0dc16BE1C31D4C1DC53bF9B45987Fc75c"
+chain_id = 43114
+abi = "abis/UniswapV2Pair.json"
+
+# BSC Contracts
+[[contracts]]
+name = "ZeroExExchangeProxy"
+address = "0xDef1C0ded9bec7F1a1670819833240f027b25EfF"
+chain_id = 56
+abi = "abis/ZeroExExchangeProxy.json"
+
+[[contracts]]
+name = "UniswapV3Factory"
+address = "0x0BFbCF9fa4f9C56B0F40a671Ad40E0805A091865"
+chain_id = 56
+abi = "abis/UniswapV3Factory.json"
+
+# Major Uniswap V2 Pairs - BSC
+[[contracts]]
+name = "UniswapV2Pair"
+address = "0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16"
+chain_id = 56
+abi = "abis/UniswapV2Pair.json"
+
+# Test contract
+[[contracts]]
+name = "DummyContract"
+address = "0x000000000000000000000000000000000000dEaD"
+chain_id = 1
+abi = "abis/DummyContract.json"
+
+

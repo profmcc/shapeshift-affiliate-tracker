@@ -1,0 +1,5 @@
+playwright==1.42.0
+beautifulsoup4==4.12.3
+pandas==2.1.4
+asyncio
+typing-extensions==4.8.0 
