@@ -1,5 +1,0 @@
-requests>=2.31.0
-sqlite3
-logging
-datetime
-typing 

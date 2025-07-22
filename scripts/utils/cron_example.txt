@@ -1,0 +1,60 @@
+# Cron Job Examples for Zapper Portfolio Scraper
+# Add these to your crontab with: crontab -e
+
+# Run every 6 hours (4 times per day)
+0 */6 * * * cd /Users/chrismccarthy/shapeshift-affiliate-tracker && /Users/chrismccarthy/shapeshift-affiliate-tracker/.venv/bin/python automated_zapper_scraper.py >> /Users/chrismccarthy/shapeshift-affiliate-tracker/logs/zapper_cron.log 2>&1
+
+# Run daily at 9 AM
+0 9 * * * cd /Users/chrismccarthy/shapeshift-affiliate-tracker && /Users/chrismccarthy/shapeshift-affiliate-tracker/.venv/bin/python automated_zapper_scraper.py >> /Users/chrismccarthy/shapeshift-affiliate-tracker/logs/zapper_cron.log 2>&1
+
+# Run weekly on Sundays at 10 AM
+0 10 * * 0 cd /Users/chrismccarthy/shapeshift-affiliate-tracker && /Users/chrismccarthy/shapeshift-affiliate-tracker/.venv/bin/python automated_zapper_scraper.py >> /Users/chrismccarthy/shapeshift-affiliate-tracker/logs/zapper_cron.log 2>&1
+
+# Run every hour during market hours (9 AM - 5 PM, Monday-Friday)
+0 9-17 * * 1-5 cd /Users/chrismccarthy/shapeshift-affiliate-tracker && /Users/chrismccarthy/shapeshift-affiliate-tracker/.venv/bin/python automated_zapper_scraper.py >> /Users/chrismccarthy/shapeshift-affiliate-tracker/logs/zapper_cron.log 2>&1
+
+# =============================================================================
+# CRON SYNTAX EXPLANATION:
+# =============================================================================
+# 
+# Format: minute hour day month weekday command
+# 
+# Examples:
+# 0 */6 * * *     = Every 6 hours (00:00, 06:00, 12:00, 18:00)
+# 0 9 * * *       = Daily at 9:00 AM
+# 0 10 * * 0      = Weekly on Sunday at 10:00 AM
+# 0 9-17 * * 1-5  = Every hour from 9 AM to 5 PM, Monday-Friday
+# 
+# =============================================================================
+# SETUP INSTRUCTIONS:
+# =============================================================================
+# 
+# 1. Open terminal and navigate to your project:
+#    cd /Users/chrismccarthy/shapeshift-affiliate-tracker
+# 
+# 2. Create logs directory:
+#    mkdir -p logs
+# 
+# 3. Edit crontab:
+#    crontab -e
+# 
+# 4. Add one of the cron jobs above (uncomment the line you want)
+# 
+# 5. Save and exit (Ctrl+X in nano, or :wq in vim)
+# 
+# 6. Verify it's installed:
+#    crontab -l
+# 
+# 7. Check logs:
+#    tail -f logs/zapper_cron.log
+# 
+# =============================================================================
+# TROUBLESHOOTING:
+# =============================================================================
+# 
+# - If the cron job doesn't run, check the log file
+# - Make sure the paths are correct for your system
+# - Ensure the virtual environment is activated in the cron job
+# - Test manually first: python automated_zapper_scraper.py
+# 
+# ============================================================================= 

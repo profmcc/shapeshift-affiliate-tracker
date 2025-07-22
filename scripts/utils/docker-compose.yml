@@ -1,0 +1,26 @@
+services:
+  affiliate-collector:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: shapeshift-affiliate-collector
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./shapeshift_affiliate_fees_comprehensive.db:/app/shapeshift_affiliate_fees_comprehensive.db
+    environment:
+      - PYTHONUNBUFFERED=1
+      - INFURA_API_KEY=${INFURA_API_KEY}
+      - POLYGON_RPC_URL=${POLYGON_RPC_URL}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "test", "-s", "/app/logs/collector.log"]
+      interval: 5m
+      timeout: 30s
+      retries: 3
+    networks:
+      - affiliate-network
+
+networks:
+  affiliate-network:
+    driver: bridge 
