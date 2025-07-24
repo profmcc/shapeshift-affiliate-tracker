@@ -1,0 +1,15 @@
+chains:
+  ethereum:
+    name: Ethereum
+    rpc_url: https://mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 1
+    relay_contract: 0xDef1C0ded9bec7F1a1670819833240f027b25EfF
+    start_block: 18000000
+    chunk_size: 1000
+  arbitrum:
+    name: Arbitrum
+    rpc_url: https://arbitrum-mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 42161
+    relay_contract: 0xDef1C0ded9bec7F1a1670819833240f027b25EfF
+    start_block: 70000000
+    chunk_size: 2000 

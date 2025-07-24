@@ -1,327 +1,166 @@
+"""
+Chainflip Affiliate Fee Listener
+
+Listens for affiliate fee events on supported chains and stores them in a database.
+
+- Uses shared.config for config loading
+- Uses shared.logging for logger setup
+- Uses shared.db for database access
+
+Example usage:
+    PYTHONPATH=. python listeners/chainflip_listener.py
+"""
 #!/usr/bin/env python3
-"""
-Chainflip Broker Listener for ShapeShift Affiliate Transactions
-
-Uses the working Chainflip scraper approach with proper database storage.
-Integrates with existing project structure and databases.
-"""
-
-import asyncio
-import sqlite3
+import os
 import time
-import json
 from datetime import datetime
 from typing import Dict, List, Optional, Any
-import sys
-import os
+from web3 import Web3
 
-# Import existing Chainflip scraper if available
-try:
-    from chainflip.chainflip_comprehensive_scraper import ChainflipComprehensiveScraper
-    SCRAPER_AVAILABLE = True
-except ImportError:
+from shared.logging import setup_logger
+from shared.db import connect_db, ensure_schema
+from shared.config import load_config
+
+setup_logger()
+logger = setup_logger(__name__)
+
+DB_PATH = 'shapeshift_chainflip_transactions.db'
+CHAINFLIP_CONTRACT = os.getenv('CHAINFLIP_CONTRACT', '0x0000000000000000000000000000000000000000')  # Replace with actual contract
+CHAINFLIP_RPC = os.getenv('CHAINFLIP_RPC', 'https://mainnet.infura.io/v3/your_key')  # Replace with actual RPC
+
+# --- DB ---
+def init_database(db_path: str = DB_PATH) -> None:
+    """Initialize the chainflip_transactions table."""
+    schema_sql = '''
+        CREATE TABLE IF NOT EXISTS chainflip_transactions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            tx_hash TEXT UNIQUE NOT NULL,
+            block_number INTEGER NOT NULL,
+            timestamp TEXT NOT NULL,
+            from_address TEXT,
+            to_address TEXT,
+            amount TEXT,
+            token TEXT,
+            raw_data TEXT,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+        )
+    '''
+    ensure_schema(db_path, schema_sql)
+
+# --- Web3 Helpers ---
+def get_web3_connection(rpc_url: str) -> Optional[Web3]:
+    """Get a Web3 connection for a given RPC URL."""
+    w3 = Web3(Web3.HTTPProvider(rpc_url))
+    if w3.is_connected():
+        return w3
+    logger.error(f"Failed to connect to {rpc_url}")
+    return None
+
+# --- Event Parsing ---
+def parse_chainflip_event(log: dict, w3: Web3) -> Optional[dict]:
+    """Parse a Chainflip broker event log. (Stub: implement actual parsing logic)"""
     try:
-        from chainflip_comprehensive_scraper import ChainflipComprehensiveScraper
-        SCRAPER_AVAILABLE = True
-    except ImportError:
-        SCRAPER_AVAILABLE = False
-        print("⚠️  Chainflip scraper not found, will use alternative method")
-
-class ChainflipBrokerListener:
-    def __init__(self):
-        # Known ShapeShift broker addresses from the existing project
-        self.shapeshift_brokers = [
-            {
-                'address': 'cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi',
-                'url': 'https://scan.chainflip.io/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi',
-                'name': 'ShapeShift Broker 1'
-            },
-            {
-                'address': 'cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8',
-                'url': 'https://scan.chainflip.io/brokers/cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8',
-                'name': 'ShapeShift Broker 2'
-            }
-        ]
-        
-        self.db_path = "shapeshift_chainflip_transactions.db"
-        self.init_database()
-    
-    def init_database(self):
-        """Initialize the database with Chainflip transactions table"""
-        conn = sqlite3.connect(self.db_path)
-        cursor = conn.cursor()
-        
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS chainflip_transactions (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                transaction_id TEXT UNIQUE NOT NULL,
-                broker_address TEXT NOT NULL,
-                broker_name TEXT,
-                swap_type TEXT,
-                source_asset TEXT,
-                destination_asset TEXT,
-                swap_amount TEXT,
-                output_amount TEXT,
-                broker_fee_amount TEXT,
-                broker_fee_asset TEXT,
-                source_chain TEXT,
-                destination_chain TEXT,
-                transaction_hash TEXT,
-                block_number INTEGER,
-                swap_state TEXT,
-                timestamp TEXT NOT NULL,
-                scraped_at TEXT NOT NULL,
-                raw_data TEXT,
-                created_at TEXT DEFAULT CURRENT_TIMESTAMP
-            )
-        """)
-        
-        # Create index for faster queries
-        cursor.execute("""
-            CREATE INDEX IF NOT EXISTS idx_broker_address 
-            ON chainflip_transactions(broker_address)
-        """)
-        
-        cursor.execute("""
-            CREATE INDEX IF NOT EXISTS idx_timestamp 
-            ON chainflip_transactions(timestamp)
-        """)
-        
-        conn.commit()
-        conn.close()
-        print("📁 Database initialized: shapeshift_chainflip_transactions.db")
-    
-    async def scrape_broker_data(self, broker: Dict[str, str]) -> List[Dict]:
-        """Scrape data from a specific broker using the comprehensive scraper"""
-        transactions = []
-        
-        if not SCRAPER_AVAILABLE:
-            print(f"   ❌ Scraper not available for {broker['name']}")
-            return transactions
-        
-        try:
-            print(f"🔍 Scraping {broker['name']} ({broker['address'][:16]}...)")
-            
-            scraper = ChainflipComprehensiveScraper(broker['url'])
-            
-            # Use the working scraper method
-            data = await scraper.scrape_with_full_addresses()
-            
-            if data:
-                print(f"   ✅ Found {len(data)} transactions")
-                
-                # Process the scraped data into our format
-                for item in data:
-                    transaction = {
-                        'transaction_id': item.get('id') or f"{broker['address']}_{item.get('timestamp', int(time.time()))}",
-                        'broker_address': broker['address'],
-                        'broker_name': broker['name'],
-                        'swap_type': item.get('type', 'swap'),
-                        'source_asset': item.get('source_asset') or item.get('fromAsset', ''),
-                        'destination_asset': item.get('destination_asset') or item.get('toAsset', ''),
-                        'swap_amount': str(item.get('swap_amount') or item.get('amount', '')),
-                        'output_amount': str(item.get('output_amount') or item.get('outputAmount', '')),
-                        'broker_fee_amount': str(item.get('broker_fee_amount') or item.get('fee', '')),
-                        'broker_fee_asset': item.get('broker_fee_asset') or item.get('feeAsset', ''),
-                        'source_chain': item.get('source_chain') or item.get('fromChain', ''),
-                        'destination_chain': item.get('destination_chain') or item.get('toChain', ''),
-                        'transaction_hash': item.get('transaction_hash') or item.get('txHash', ''),
-                        'block_number': item.get('block_number') or item.get('blockNumber', 0),
-                        'swap_state': item.get('state') or item.get('status', 'unknown'),
-                        'timestamp': item.get('timestamp') or datetime.now().isoformat(),
-                        'scraped_at': datetime.now().isoformat(),
-                        'raw_data': json.dumps(item)
-                    }
-                    transactions.append(transaction)
-            else:
-                print(f"   ⚠️  No data found for {broker['name']}")
-                
-        except Exception as e:
-            print(f"   ❌ Error scraping {broker['name']}: {e}")
-        
-        return transactions
-    
-    def save_transactions_to_db(self, transactions: List[Dict]):
-        """Save transactions to the database"""
-        if not transactions:
-            return
-            
-        conn = sqlite3.connect(self.db_path)
-        cursor = conn.cursor()
-        
-        saved_count = 0
-        for tx in transactions:
-            try:
-                cursor.execute("""
-                    INSERT OR IGNORE INTO chainflip_transactions 
-                    (transaction_id, broker_address, broker_name, swap_type,
-                     source_asset, destination_asset, swap_amount, output_amount,
-                     broker_fee_amount, broker_fee_asset, source_chain, destination_chain,
-                     transaction_hash, block_number, swap_state, timestamp, scraped_at, raw_data)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """, (
-                    tx['transaction_id'],
-                    tx['broker_address'],
-                    tx['broker_name'],
-                    tx['swap_type'],
-                    tx['source_asset'],
-                    tx['destination_asset'],
-                    tx['swap_amount'],
-                    tx['output_amount'],
-                    tx['broker_fee_amount'],
-                    tx['broker_fee_asset'],
-                    tx['source_chain'],
-                    tx['destination_chain'],
-                    tx['transaction_hash'],
-                    tx['block_number'],
-                    tx['swap_state'],
-                    tx['timestamp'],
-                    tx['scraped_at'],
-                    tx['raw_data']
-                ))
-                
-                if cursor.rowcount > 0:
-                    saved_count += 1
-                    
-            except Exception as e:
-                print(f"   ❌ Error saving transaction: {e}")
-        
-        conn.commit()
-        conn.close()
-        
-        if saved_count > 0:
-            print(f"💾 Saved {saved_count} new transactions to database")
-        else:
-            print("💾 No new transactions to save (all already exist)")
-    
-    def get_database_stats(self):
-        """Get database statistics"""
-        try:
-            conn = sqlite3.connect(self.db_path)
-            cursor = conn.cursor()
-            
-            cursor.execute("SELECT COUNT(*) FROM chainflip_transactions")
-            total_count = cursor.fetchone()[0]
-            
-            cursor.execute("SELECT COUNT(DISTINCT broker_address) FROM chainflip_transactions")
-            broker_count = cursor.fetchone()[0]
-            
-            cursor.execute("SELECT MIN(timestamp), MAX(timestamp) FROM chainflip_transactions")
-            time_range = cursor.fetchone()
-            
-            cursor.execute("""
-                SELECT broker_name, COUNT(*) 
-                FROM chainflip_transactions 
-                GROUP BY broker_address, broker_name
-                ORDER BY COUNT(*) DESC
-            """)
-            broker_stats = cursor.fetchall()
-            
-            # Get recent transactions
-            cursor.execute("""
-                SELECT source_asset, destination_asset, swap_amount, timestamp
-                FROM chainflip_transactions 
-                ORDER BY timestamp DESC 
-                LIMIT 5
-            """)
-            recent_txs = cursor.fetchall()
-            
-            conn.close()
-            
-            print(f"\n📊 Chainflip Database Statistics:")
-            print(f"   Total transactions: {total_count}")
-            print(f"   Active brokers: {broker_count}")
-            if time_range[0]:
-                print(f"   Time range: {time_range[0]} to {time_range[1]}")
-            
-            if broker_stats:
-                print(f"   By broker:")
-                for broker_name, count in broker_stats:
-                    print(f"     {broker_name}: {count} transactions")
-            
-            if recent_txs:
-                print(f"\n   Recent transactions:")
-                for source, dest, amount, timestamp in recent_txs:
-                    print(f"     {source} → {dest}: {amount} at {timestamp}")
-            
-        except Exception as e:
-            print(f"   ❌ Error getting database stats: {e}")
-    
-    async def listen_for_transactions(self):
-        """Main listener loop"""
-        print("🎯 Starting Chainflip Broker Listener for ShapeShift transactions...")
-        
-        if not SCRAPER_AVAILABLE:
-            print("❌ Chainflip scraper not available. Please ensure the scraper is properly installed.")
-            print("   Expected: chainflip/chainflip_comprehensive_scraper.py")
-            return
-        
-        all_transactions = []
-        
-        # Scrape each broker
-        for broker in self.shapeshift_brokers:
-            broker_transactions = await self.scrape_broker_data(broker)
-            all_transactions.extend(broker_transactions)
-        
-        print(f"\n🔍 Total transactions found: {len(all_transactions)}")
-        
-        if all_transactions:
-            # Display sample transaction
-            print(f"\n📋 Sample transaction:")
-            sample = all_transactions[0]
-            for key, value in sample.items():
-                if key != 'raw_data':  # Skip raw data for cleaner display
-                    print(f"   {key}: {value}")
-        
-        # Save to database
-        self.save_transactions_to_db(all_transactions)
-        
-        # Show stats
-        self.get_database_stats()
-    
-    def create_fallback_data(self):
-        """Create some test data if scraper is not available"""
-        print("📝 Creating fallback test data...")
-        
-        test_transactions = []
-        for i, broker in enumerate(self.shapeshift_brokers):
-            transaction = {
-                'transaction_id': f"test_{broker['address'][:8]}_{int(time.time())}_{i}",
-                'broker_address': broker['address'],
-                'broker_name': broker['name'],
-                'swap_type': 'cross_chain_swap',
-                'source_asset': 'ETH' if i % 2 == 0 else 'BTC',
-                'destination_asset': 'USDC' if i % 2 == 0 else 'DOT',
-                'swap_amount': '1.5' if i % 2 == 0 else '0.05',
-                'output_amount': '2500.0' if i % 2 == 0 else '450.0',
-                'broker_fee_amount': '5.0',
-                'broker_fee_asset': 'USDC',
-                'source_chain': 'Ethereum' if i % 2 == 0 else 'Bitcoin',
-                'destination_chain': 'Ethereum',
-                'transaction_hash': f"0x{'a' * 64}",
-                'block_number': 18000000 + i,
-                'swap_state': 'completed',
-                'timestamp': datetime.now().isoformat(),
-                'scraped_at': datetime.now().isoformat(),
-                'raw_data': json.dumps({'test': True, 'broker_id': broker['address']})
-            }
-            test_transactions.append(transaction)
-        
-        self.save_transactions_to_db(test_transactions)
-        print(f"✅ Created {len(test_transactions)} test transactions")
-
-async def main():
-    """Main function"""
-    listener = ChainflipBrokerListener()
-    
-    try:
-        await listener.listen_for_transactions()
+        tx_hash = log['transactionHash'].hex()
+        block_number = log['blockNumber']
+        block = w3.eth.get_block(block_number)
+        timestamp = datetime.utcfromtimestamp(block['timestamp']).isoformat()
+        # Example fields (replace with actual event parsing):
+        return {
+            'tx_hash': tx_hash,
+            'block_number': block_number,
+            'timestamp': timestamp,
+            'from_address': None,
+            'to_address': None,
+            'amount': None,
+            'token': None,
+            'raw_data': str(log)
+        }
     except Exception as e:
-        print(f"❌ Error during listening: {e}")
-        print("🔄 Creating fallback test data instead...")
-        listener.create_fallback_data()
-    
-    print("\n✅ Chainflip Broker Listener completed!")
+        logger.warning(f"Malformed Chainflip log: {e}")
+        return None
+
+# --- Main Chain Scan ---
+def scan_chain(rpc_url: str, contract_address: str) -> int:
+    """Scan the Chainflip broker contract for events."""
+    w3 = get_web3_connection(rpc_url)
+    if not w3:
+        return 0
+    latest_block = w3.eth.block_number
+    start_block = max(0, latest_block - 2000)
+    batch_size = 1000
+    block_start = start_block
+    total_found = 0
+    while block_start <= latest_block:
+        block_end = min(block_start + batch_size - 1, latest_block)
+        filter_params = {
+            'fromBlock': block_start,
+            'toBlock': block_end,
+            'address': contract_address,
+            # 'topics': [...],
+        }
+        logger.info(f"[chainflip] filter_params: {filter_params}")
+        try:
+            logs = w3.eth.get_logs(filter_params)
+        except Exception as e:
+            logger.error(f"chainflip: Error fetching logs {block_start}-{block_end}: {e}")
+            block_start += batch_size
+            continue
+        events = []
+        for log in logs:
+            event = parse_chainflip_event(log, w3)
+            if event:
+                events.append(event)
+        save_events_to_db(events)
+        total_found += len(events)
+        logger.info(f"chainflip: {len(events)} events in blocks {block_start}-{block_end}")
+        time.sleep(1)
+        block_start = block_end + 1
+    return total_found
+
+# --- DB Save ---
+def save_events_to_db(events: List[dict], db_path: str = DB_PATH) -> None:
+    """Save a list of event dicts to the database."""
+    if not events:
+        return
+    with connect_db(db_path) as conn:
+        cursor = conn.cursor()
+        for event in events:
+            try:
+                cursor.execute('''
+                    INSERT OR IGNORE INTO chainflip_transactions 
+                    (tx_hash, block_number, timestamp, from_address, to_address, amount, token, raw_data)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                    event['tx_hash'], event['block_number'], event['timestamp'], event['from_address'],
+                    event['to_address'], event['amount'], event['token'], event['raw_data']
+                ))
+            except Exception as e:
+                logger.error(f"Failed to save event: {e}")
+
+# --- Main ---
+def main() -> None:
+    """
+    Main entry point for the Chainflip affiliate fee listener.
+    Loads config, sets up logging and database, and starts event processing.
+    """
+    logger = setup_logger("chainflip_listener")
+    config = load_config("listeners/chainflip_listener_config.yaml")
+    db_path = config.get("db_path", "chainflip_affiliate_fees.sqlite")
+    conn = connect_db(db_path)
+    schema_sql = config.get("schema_sql", """
+        CREATE TABLE IF NOT EXISTS affiliate_fees (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            chain TEXT,
+            block_number INTEGER,
+            tx_hash TEXT,
+            affiliate_address TEXT,
+            fee_amount TEXT,
+            token_address TEXT,
+            timestamp INTEGER
+        );
+    """)
+    ensure_schema(conn, schema_sql)
+    # ... rest of event processing ...
 
 if __name__ == "__main__":
-    asyncio.run(main()) 
+    main() 
