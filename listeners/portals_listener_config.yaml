@@ -1,0 +1,46 @@
+chains:
+  ethereum:
+    name: Ethereum
+    rpc_url: https://mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 1
+    portals_router: 0xbf5A7F3629fB325E2a8453D595AB103465F75E62
+    start_block: 22700000
+    batch_size: 5000
+  polygon:
+    name: Polygon
+    rpc_url: https://polygon-mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 137
+    portals_router: 0xbf5A7F3629fB325E2a8453D595AB103465F75E62
+    start_block: 45000000
+    batch_size: 5000
+  arbitrum:
+    name: Arbitrum
+    rpc_url: https://arbitrum-mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 42161
+    portals_router: 0xbf5A7F3629fB325E2a8453D595AB103465F75E62
+    start_block: 70000000
+    batch_size: 5000
+  optimism:
+    name: Optimism
+    rpc_url: https://optimism-mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 10
+    portals_router: 0xbf5A7F3629fB325E2a8453D595AB103465F75E62
+    start_block: 85000000
+    batch_size: 5000
+  base:
+    name: Base
+    rpc_url: https://base-mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 8453
+    portals_router: 0xbf5A7F3629fB325E2a8453D595AB103465F75E62
+    start_block: 5000000
+    batch_size: 5000
+
+dao_addresses:
+  ethereum: "0x90A48D5CF7343B08dA12E067680B4C6dbfE551Be"
+  polygon: "0xB5F944600785724e31Edb90F9DFa16dBF01Af000"
+  arbitrum: "0x38276553F8fbf2A027D901F8be45f00373d8Dd48"
+  optimism: "0x6268d07327f4fb7380732dc6d63d95F88c0E083b"
+  base: "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"
+
+portals_contracts:
+  - 0xbf5A7F3629fB325E2a8453D595AB103465F75E62 

@@ -1,0 +1,36 @@
+chains:
+  ethereum:
+    name: Ethereum
+    rpc_url: https://mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 1
+    zerox_contract: 0xDef1C0ded9bec7F1a1670819833240f027b25EfF
+    start_block: 18000000
+    chunk_size: 1000
+  polygon:
+    name: Polygon
+    rpc_url: https://polygon-mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 137
+    zerox_contract: 0xDef1C0ded9bec7F1a1670819833240f027b25EfF
+    start_block: 45000000
+    chunk_size: 2000
+  arbitrum:
+    name: Arbitrum
+    rpc_url: https://arbitrum-mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 42161
+    zerox_contract: 0xDef1C0ded9bec7F1a1670819833240f027b25EfF
+    start_block: 70000000
+    chunk_size: 2000
+  optimism:
+    name: Optimism
+    rpc_url: https://optimism-mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 10
+    zerox_contract: 0xDef1C0ded9bec7F1a1670819833240f027b25EfF
+    start_block: 85000000
+    chunk_size: 2000
+  base:
+    name: Base
+    rpc_url: https://base-mainnet.infura.io/v3/${INFURA_API_KEY}
+    chain_id: 8453
+    zerox_contract: 0xDef1C0ded9bec7F1a1670819833240f027b25EfF
+    start_block: 5000000
+    chunk_size: 2000 
