@@ -4,9 +4,10 @@ Listener manager for coordinating multiple affiliate fee listeners.
 
 import asyncio
 import logging
+from typing import Dict, List, Optional, Any
 
-from .base import BaseListener
 from .config import Config
+from .base import BaseListener
 
 
 class ListenerManager:
@@ -16,15 +17,15 @@ class ListenerManager:
         """Initialize the listener manager."""
         self.config = config
         self.logger = logging.getLogger(__name__)
-        self.listeners: dict[str, BaseListener] = {}
-        self.running_tasks: list[asyncio.Task] = []
+        self.listeners: Dict[str, BaseListener] = {}
+        self.running_tasks: List[asyncio.Task] = []
 
     def register_listener(self, chain: str, listener: BaseListener) -> None:
         """Register a listener for a specific chain."""
         self.listeners[chain.lower()] = listener
         self.logger.info(f"Registered listener for chain: {chain}")
 
-    async def run_chain(self, chain: str, from_block: int | None = None, sink: str = "stdout") -> None:
+    async def run_chain(self, chain: str, from_block: Optional[int] = None, sink: str = "stdout") -> None:
         """Run a listener for a specific chain."""
         chain_lower = chain.lower()
 
@@ -88,9 +89,9 @@ class ListenerManager:
 
         self.running_tasks.clear()
 
-    async def health_check(self) -> dict[str, any]:
+    async def health_check(self) -> Dict[str, Any]:
         """Perform health check on all listeners."""
-        health_status = {
+        health_status: Dict[str, Any] = {
             "manager_status": "healthy",
             "listeners": {},
             "total_listeners": len(self.listeners),
@@ -111,10 +112,10 @@ class ListenerManager:
 
         return health_status
 
-    def get_supported_chains(self) -> list[str]:
+    def get_supported_chains(self) -> List[str]:
         """Get list of supported chains."""
         return list(self.listeners.keys())
 
-    def get_listener(self, chain: str) -> BaseListener | None:
+    def get_listener(self, chain: str) -> Optional[BaseListener]:
         """Get a specific listener by chain."""
         return self.listeners.get(chain.lower())
