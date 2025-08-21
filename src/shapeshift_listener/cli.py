@@ -10,7 +10,6 @@ import asyncio
 import logging
 import sys
 from pathlib import Path
-from typing import Optional
 
 from .core.config import Config
 from .core.listener_manager import ListenerManager
@@ -39,20 +38,20 @@ def parse_args() -> argparse.Namespace:
 Examples:
   # Run listener for Arbitrum from specific block
   ss-listener run --chain arbitrum --from-block 22222222 --sink stdout
-  
+
   # Run with debug logging
   ss-listener run --chain base --from-block 32900000 --sink csv --log-level DEBUG
-  
+
   # List available chains
   ss-listener list-chains
-  
+
   # Check configuration
   ss-listener config --validate
         """
     )
-    
+
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
-    
+
     # Run command
     run_parser = subparsers.add_parser("run", help="Run a listener")
     run_parser.add_argument("--chain", required=True, help="Chain to monitor (e.g., arbitrum, base, ethereum)")
@@ -60,18 +59,18 @@ Examples:
     run_parser.add_argument("--sink", default="stdout", choices=["stdout", "csv", "database"], help="Output destination")
     run_parser.add_argument("--log-level", default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR"], help="Log level")
     run_parser.add_argument("--config", type=Path, help="Path to configuration file")
-    
+
     # List chains command
-    list_parser = subparsers.add_parser("list-chains", help="List available chains")
-    
+    subparsers.add_parser("list-chains", help="List available chains")
+
     # Config command
     config_parser = subparsers.add_parser("config", help="Configuration management")
     config_parser.add_argument("--validate", action="store_true", help="Validate configuration")
     config_parser.add_argument("--show", action="store_true", help="Show current configuration")
-    
+
     # Version command
-    version_parser = subparsers.add_parser("version", help="Show version information")
-    
+    subparsers.add_parser("version", help="Show version information")
+
     return parser.parse_args()
 
 
@@ -80,21 +79,21 @@ async def run_listener(args: argparse.Namespace) -> None:
     try:
         # Load configuration
         config = Config.from_file(args.config) if args.config else Config.from_env()
-        
+
         # Set up logging
         setup_logging(args.log_level)
         logger = logging.getLogger(__name__)
-        
+
         logger.info("Starting ShapeShift Affiliate Listener", extra={
             "chain": args.chain,
             "from_block": args.from_block,
             "sink": args.sink
         })
-        
+
         # Initialize and run listener manager
         manager = ListenerManager(config)
         await manager.run_chain(args.chain, args.from_block, args.sink)
-        
+
     except Exception as e:
         logger.error(f"Failed to run listener: {e}", exc_info=True)
         sys.exit(1)
@@ -111,7 +110,7 @@ def list_chains() -> None:
         {"name": "avalanche", "chain_id": 43114, "description": "Avalanche C-Chain"},
         {"name": "bsc", "chain_id": 56, "description": "BNB Smart Chain"},
     ]
-    
+
     print("Available Chains:")
     print("================")
     for chain in chains:
@@ -122,11 +121,11 @@ def show_config(args: argparse.Namespace) -> None:
     """Show or validate configuration."""
     try:
         config = Config.from_env()
-        
+
         if args.validate:
             config.validate()
             print("✅ Configuration is valid")
-        
+
         if args.show:
             print("Current Configuration:")
             print("=====================")
@@ -135,7 +134,7 @@ def show_config(args: argparse.Namespace) -> None:
             print(f"Max Retries: {config.max_retries}")
             print(f"Log Level: {config.log_level}")
             print(f"Data Directory: {config.data_dir}")
-            
+
     except Exception as e:
         print(f"❌ Configuration error: {e}")
         sys.exit(1)
@@ -143,7 +142,7 @@ def show_config(args: argparse.Namespace) -> None:
 
 def show_version() -> None:
     """Show version information."""
-    from . import __version__, __author__, __license__
+    from . import __author__, __license__, __version__
     print(f"ShapeShift Affiliate Listener v{__version__}")
     print(f"Author: {__author__}")
     print(f"License: {__license__}")
@@ -152,7 +151,7 @@ def show_version() -> None:
 def main() -> None:
     """Main entry point."""
     args = parse_args()
-    
+
     if args.command == "run":
         asyncio.run(run_listener(args))
     elif args.command == "list-chains":
