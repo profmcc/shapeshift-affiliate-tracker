@@ -149,12 +149,12 @@ def show_version() -> None:
     print(f"License: {__license__}")
 
 
-async def main() -> None:
+def main() -> None:
     """Main entry point."""
     args = parse_args()
     
     if args.command == "run":
-        await run_listener(args)
+        asyncio.run(run_listener(args))
     elif args.command == "list-chains":
         list_chains()
     elif args.command == "config":
@@ -167,5 +167,4 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
-
+    main()
