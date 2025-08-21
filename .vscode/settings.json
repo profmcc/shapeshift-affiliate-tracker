@@ -1,0 +1,19 @@
+{
+    "cursor.general.globalCursorIgnoreList": [
+        "**/.env.*",
+        "**/credentials.json",
+        "**/credentials.*.json",
+        "**/secret.json",
+        "**/secrets.json",
+        "**/*.key",
+        "**/*.pem",
+        "**/*.pfx",
+        "**/*.p12",
+        "**/*.crt",
+        "**/*.cer",
+        "**/id_rsa",
+        "**/id_dsa",
+        "**/.ssh/id_*"
+    ],
+    "python2.pythonPath": "/Users/chrismccarthy/shapeshift-affiliate-tracker/venv-relay/bin/python"
+}
