@@ -1,75 +1,67 @@
-# ShapeShift Affiliate Tracker Configuration
-# =======================================
+# ShapeShift Affiliate Listener Configuration
+# =========================================
 # 
-# HISTORY & LEARNING:
-# - Originally had scattered hardcoded addresses across multiple listener files
-# - This led to inconsistent affiliate tracking and maintenance nightmares
-# - Previous attempts at centralized config failed due to overly strict validation
-# - Current approach: Flexible config with graceful fallbacks for hybrid system
+# This configuration file provides a centralized source of truth for:
+# - ShapeShift affiliate addresses across all chains and protocols
+# - Protocol-specific contract addresses and event signatures
+# - Chain configurations with optimized RPC settings
+# - Data structure definitions for unified cross-protocol analysis
 #
-# WHAT THIS SYSTEM IS ATTEMPTING:
-# - Single source of truth for all ShapeShift affiliate addresses
-# - Centralized contract addresses and chain configurations
-# - Protocol-specific settings and event signatures
-# - Support for both centralized and legacy listener approaches
-#
-# WHY THIS APPROACH:
-# - Eliminates duplicate address definitions across files
-# - Enables easy updates without touching listener code
-# - Provides consistency across all protocols
-# - Supports gradual migration from hardcoded to centralized config
-#
-# CURRENT STATUS:
-# - Hybrid approach implemented and working
-# - Centralized config for new listeners (portals, thorchain, cowswap)
-# - Legacy support for existing listeners (relay, butterswap)
-# - No volume thresholds (comprehensive tracking)
+# The system supports both centralized and legacy listener approaches
+# for gradual migration from hardcoded configurations.
 
 # API Keys and RPC Endpoints
 # ==========================
-# These are loaded from environment variables for security
+# Loaded from environment variables for security
 # Priority: .env file > environment variables > config file
 api:
   alchemy_api_key: "${ALCHEMY_API_KEY}"      # Primary RPC provider (recommended)
   infura_api_key: "${INFURA_API_KEY}"        # Fallback RPC provider
   coinmarketcap_api_key: "${COINMARKETCAP_API_KEY}"  # Price data (optional)
 
-# ShapeShift Affiliate Addresses (all known variations)
-# ====================================================
-# This section consolidates all known ShapeShift affiliate addresses
-# from various protocols and historical data
-#
-# ADDRESS STRATEGY:
-# - Primary: Main address used across most protocols
-# - Protocol-specific: Addresses specific to certain protocols
-# - Legacy: Historical addresses found in existing data
-# - Variations: Common patterns and text variations for detection
+# ShapeShift Affiliate Addresses
+# ==============================
+# Centralized configuration for all known affiliate addresses
+# Supports both per-address and per-chain filtering strategies
 shapeshift_affiliates:
-  # Primary ShapeShift addresses
-  primary: "0x35339070f178dC4119732982C23F5a8d88D3f8a3"  # Main address (most protocols)
-  relay: "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"    # Relay affiliate (Base chain)
-  portals: "0x35339070f178dC4119732982C23F5a8d88D3f8a3"   # Portals affiliate
-  thorchain: "0x35339070f178dC4119732982C23F5a8d88D3f8a3" # ThorChain affiliate
-  cowswap: "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"   # CoW Swap affiliate (Base chain)
-  butterswap: "0x35339070f178dC4119732982C23F5a8d88D3f8a3" # ButterSwap affiliate (Base chain)
+  # Main Safe addresses for general affiliate tracking (chain-specific)
+  mainnet: "0x90A48D5CF7343B08dA12E067680B4C6dbfE551Be"      # Ethereum Mainnet Safe
+  base: "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"         # Base Safe
+  optimism: "0x6268d07327f4fb7380732dc6d63d95F88c0E083b"      # Optimism Safe
+  avalanche: "0x74d63F31C2335b5b3BA7ad2812357672b2624cEd"     # Avalanche Safe
+  polygon: "0xB5F944600785724e31Edb90F9DFa16dBF01Af000"       # Polygon Safe
+  gnosis: "0xb0E3175341794D1dc8E5F02a02F9D26989EbedB3"        # Gnosis Chain Safe
+  bsc: "0x8b92b1698b57bEDF2142297e9397875ADBb2297E"           # Binance Smart Chain Safe
+  arbitrum: "0x38276553F8fbf2A027D901F8be45f00373d8Dd48"      # Arbitrum Safe
+  
+  # Protocol-specific addresses (overrides chain defaults)
+  butterswap: "0x35339070f178dC4119732982C23F5a8d88D3f8a3"   # ButterSwap affiliate (d3f8a3)
+  portals: "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"       # Portals affiliate
+  relay: "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"         # Relay affiliate (Base chain)
+  cowswap: "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"       # CoW Swap affiliate (Base chain)
+  
+  # Cross-chain protocols (non-EVM)
+  thorchain: "thor122h9hlrugzdny9ct95z6g7afvpzu34s73uklju"    # THORChain affiliate address
+  thorchain_name: "ss"                                          # THORChain affiliate name abbreviation
+  chainflip: "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi"  # Chainflip affiliate address
   
   # Alternative/legacy addresses found in data
-  # These were discovered during testing and analysis
   legacy_relay: "0x2905d7e4d048d29954f81b02171dd313f457a4a4"  # Found in existing relay data
   legacy_portals: "0x0840bba848e991cdcfbf2b71b8e1cb94fb72d6343ad4bb182f7ee1c48612221d"  # From Portals transaction analysis
   
-  # Protocol-specific addresses
-  # ThorChain uses different address format (bech32)
-  thorchain_address: "thor122h9hlrugzdny9ct95z6g7afvpzu34s73uklju"  # THORChain affiliate address
-  thorchain_name: "ss"  # THORChain affiliate name abbreviation (used in memos)
-  
   # Common variations for pattern matching
-  # These help detect affiliate transactions even with slight variations
   variations:
-    - "0x35339070f178dC4119732982C23F5a8d88D3f8a3"  # Current primary
-    - "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"  # Relay/CoW Swap Base
-    - "0x2905d7e4d048d29954f81b02171dd313f457a4a4"  # Legacy
-    - "0x0840bba848e991cdcfbf2b71b8e1cb94fb72d6343ad4bb182f7ee1c48612221d"  # Portals
+    - "0x90A48D5CF7343B08dA12E067680B4C6dbfE551Be"  # Mainnet Safe
+    - "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"  # Base Safe
+    - "0x6268d07327f4fb7380732dc6d63d95F88c0E083b"  # Optimism Safe
+    - "0x74d63F31C2335b5b3BA7ad2812357672b2624cEd"  # Avalanche Safe
+    - "0xB5F944600785724e31Edb90F9DFa16dBF01Af000"  # Polygon Safe
+    - "0xb0E3175341794D1dc8E5F02a02F9D26989EbedB3"  # Gnosis Safe
+    - "0x8b92b1698b57bEDF2142297e9397875ADBb2297E"  # BSC Safe
+    - "0x38276553F8fbf2A027D901F8be45f00373d8Dd48"  # Arbitrum Safe
+    - "0x35339070f178dC4119732982C23F5a8d88D3f8a3"  # ButterSwap (d3f8a3)
+    - "thor122h9hlrugzdny9ct95z6g7afvpzu34s73uklju"  # THORChain
+    - "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi"  # Chainflip
     - "shapeshift"  # Text variations (case-insensitive)
     - "ss"  # Abbreviation (common in memos)
     - "ShapeShift"  # Capitalized variations
@@ -77,8 +69,8 @@ shapeshift_affiliates:
 
 # Chain Configurations
 # ====================
-# Each blockchain has its own configuration for optimal performance
-# Settings are tuned based on network characteristics and rate limits
+# Optimized settings for each blockchain network
+# Includes RPC URLs, starting blocks, and performance tuning
 chains:
   ethereum:
     name: "Ethereum Mainnet"
@@ -87,6 +79,7 @@ chains:
     start_block: 19000000  # Approximate deployment of most protocols
     chunk_size: 100        # Blocks per batch (conservative for mainnet)
     delay: 0.5             # Seconds between batches (rate limiting)
+    reorg_window_blocks: 25  # Confirmation blocks for reorg safety
     
   polygon:
     name: "Polygon PoS"
@@ -95,6 +88,7 @@ chains:
     start_block: 50000000  # Later deployment on Polygon
     chunk_size: 100        # Conservative for stability
     delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
     
   arbitrum:
     name: "Arbitrum One"
@@ -103,6 +97,7 @@ chains:
     start_block: 100000000 # Much later deployment
     chunk_size: 100        # Conservative approach
     delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
     
   optimism:
     name: "Optimism"
@@ -111,6 +106,7 @@ chains:
     start_block: 50000000  # Later deployment
     chunk_size: 100        # Conservative
     delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
     
   base:
     name: "Base"
@@ -119,6 +115,7 @@ chains:
     start_block: 32900000  # Base deployment block
     chunk_size: 100        # Conservative
     delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
     
   avalanche:
     name: "Avalanche"
@@ -127,15 +124,32 @@ chains:
     start_block: 30000000  # Later deployment
     chunk_size: 100        # Conservative
     delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
+    
+  bsc:
+    name: "Binance Smart Chain"
+    chain_id: 56
+    rpc_url: "https://bsc-dataseed.binance.org/"  # Public RPC
+    start_block: 20000000  # Later deployment
+    chunk_size: 100        # Conservative
+    delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
+    
+  gnosis:
+    name: "Gnosis Chain"
+    chain_id: 100
+    rpc_url: "https://rpc.gnosischain.com/"  # Public RPC
+    start_block: 25000000  # Later deployment
+    chunk_size: 100        # Conservative
+    delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
 
 # Protocol-Specific Contract Addresses
 # ===================================
-# Each protocol has different contract addresses across chains
-# Some protocols use the same address on all chains, others vary
+# Contract addresses and event signatures for affiliate fee detection
 contracts:
   relay:
     # Relay router addresses across chains
-    # Relay is a cross-chain aggregation protocol
     ethereum: "0x542f021da7834c7f81531b48961d3f467f54b0f08"
     polygon: "0x542f021da7834c7f81531b48961d3f467f54b0f08"
     arbitrum: "0x542f021da7834c7f81531b48961d3f467f54b0f08"
@@ -151,8 +165,7 @@ contracts:
     transfer_event: "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
     
   portals:
-    # Portals contract addresses
-    # Portals is a bridge protocol, same address across all chains
+    # Portals contract addresses (bridge protocol, same across chains)
     ethereum: "0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23"
     polygon: "0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23"
     arbitrum: "0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23"
@@ -164,18 +177,16 @@ contracts:
     affiliate_fee_event: "0x4a25d94a55df505cf9da1f1649d0381e2613c3c83c6a0a3df055ae0e82f6e4d7"
     
   thorchain:
-    # ThorChain API endpoints
-    # ThorChain doesn't use smart contracts, uses API endpoints instead
+    # ThorChain API endpoints (non-EVM protocol)
     midgard_api: "https://midgard.ninerealms.com/v2"      # Transaction data API
     thornode_api: "https://thornode.ninerealms.com"       # Node information API
     
-    # ThorChain addresses (if any)
+    # ThorChain addresses
     affiliate_address: "thor122h9hlrugzdny9ct95z6g7afvpzu34s73uklju"  # Affiliate address
     affiliate_name: "ss"  # Affiliate name abbreviation (used in memos)
     
   cowswap:
-    # CoW Swap contract addresses
-    # CoW Swap uses the same settlement contract across all chains
+    # CoW Swap contract addresses (same across all chains)
     ethereum: "0x9008d19f58aabd9ed0d60971565aa8510560ab41"
     polygon: "0x9008d19f58aabd9ed0d60971565aa8510560ab41"
     arbitrum: "0x9008d19f58aabd9ed0d60971565aa8510560ab41"
@@ -188,7 +199,6 @@ contracts:
     
   butterswap:
     # ButterSwap contract addresses (using Uniswap V2 as reference)
-    # ButterSwap likely uses similar contracts to Uniswap V2
     ethereum: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"      # Uniswap V2 Router
     polygon: "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff"      # QuickSwap Router
     optimism: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"      # Uniswap V2 Router
@@ -202,6 +212,78 @@ contracts:
     mint_event: "0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f"
     burn_event: "0xdccd412f0b1252819cb1fd330b93224ca42612892bb3f4f789976e6d81936496"
     transfer_event: "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+    
+  chainflip:
+    # Chainflip indexer API endpoints
+    indexer_api: "https://api.chainflip.io"  # Main indexer API
+    affiliate_address: "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi"
+
+# Data Structure Configuration
+# ===========================
+# Defines the unified event structure for cross-protocol analysis
+# All protocols output data in this standardized format
+data_structure:
+  # Required fields for all events
+  required_fields:
+    - "protocol"
+    - "chain"
+    - "block_number"
+    - "tx_hash"
+    - "block_timestamp"
+    - "block_date"
+    - "from_address"
+    - "to_address"
+    - "user_address"
+    - "affiliate_address"
+    - "affiliate_fee_amount"
+    - "affiliate_fee_token"
+    - "affiliate_fee_usd"
+    - "input_token"
+    - "input_amount"
+    - "input_amount_usd"
+    - "output_token"
+    - "output_amount"
+    - "output_amount_usd"
+    - "volume_usd"
+    - "status"
+    - "created_at"
+    - "created_date"
+  
+  # Optional fields for enhanced analysis
+  optional_fields:
+    - "expected_fee_bps"
+    - "actual_fee_bps"
+    - "gas_used"
+    - "gas_price"
+    - "gas_cost_usd"
+    - "swap_path"
+    - "is_streaming_swap"
+    - "liquidity_fee"
+    - "swap_slip"
+    - "reorg_depth"
+    - "confirmations"
+    - "is_final"
+    - "reorg_window_blocks"
+    - "order_uid"
+    - "app_code"
+    - "app_data"
+    - "error_code"
+    - "error_message"
+  
+  # Field types and validation rules
+  field_types:
+    protocol: "string"
+    chain: "string"
+    block_number: "integer"
+    tx_hash: "string"
+    block_timestamp: "integer"
+    block_date: "string"
+    affiliate_fee_amount: "string"
+    affiliate_fee_usd: "float"
+    volume_usd: "float"
+    status: "string"
+    created_at: "string"
+    created_date: "string"
 
 # Data Storage Configuration
 # =========================
@@ -220,6 +302,7 @@ storage:
     thorchain: "thorchain_transactions.csv"       # ThorChain swap transactions
     cowswap: "cowswap_transactions.csv"           # CoW Swap transactions
     butterswap: "butterswap_transactions.csv"     # ButterSwap transactions
+    chainflip: "chainflip_transactions.csv"       # Chainflip transactions
     block_tracker: "{protocol}_block_tracker.csv"  # Progress tracking
     consolidated: "consolidated_transactions.csv"  # Combined data
 
@@ -229,15 +312,14 @@ storage:
 # Common settings apply to all, protocol-specific override them
 listeners:
   # Common settings for all listeners
-  # These provide sensible defaults
   common:
     max_blocks_per_scan: 1000    # Maximum blocks to scan in one run
     retry_attempts: 3             # Number of retries on failure
     retry_delay: 1.0              # Seconds between retries
     rate_limit_delay: 0.5         # Base delay for rate limiting
+    reorg_window_blocks: 25       # Confirmation blocks for reorg safety
     
   # Protocol-specific settings
-  # These override common settings for optimal performance
   relay:
     chunk_size: 100               # Blocks per batch
     delay: 0.5                    # Seconds between batches
@@ -261,6 +343,10 @@ listeners:
     chunk_size: 100               # Standard batch size
     delay: 0.5                    # Rate limiting
     max_blocks: 1000              # Reasonable limit
+    
+  chainflip:
+    api_rate_limit: 1.0           # Seconds between API calls
+    max_swaps_per_request: 100    # Maximum swaps per API request
 
 # Volume Thresholds
 # =================
@@ -296,3 +382,13 @@ monitoring:
   health_check_interval: 300      # Health check every 5 minutes
   alert_on_failure: true          # Send alerts on failures
   max_consecutive_failures: 3     # Alert after 3 consecutive failures
+
+# Performance Optimization
+# =======================
+# Settings for optimizing listener performance
+performance:
+  batch_processing: true          # Enable batch processing for throughput
+  async_rpc_calls: true           # Use async RPC calls where possible
+  token_metadata_cache: true      # Cache token metadata and prices
+  exponential_backoff: true       # Use exponential backoff for rate limiting
+  max_concurrent_requests: 10     # Maximum concurrent RPC requests
