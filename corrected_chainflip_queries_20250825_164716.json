@@ -1,0 +1,28 @@
+{
+  "summary": {
+    "queried_at": "2025-08-25T16:46:58.258707",
+    "brokers": [
+      {
+        "name": "ShapeShift Broker 1",
+        "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+        "nonce": 0,
+        "total_transactions": 0,
+        "is_active": false
+      },
+      {
+        "name": "ShapeShift Broker 2",
+        "address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+        "nonce": 6,
+        "total_transactions": 6,
+        "is_active": true
+      }
+    ],
+    "total_transactions": 6
+  },
+  "recent_transactions": [],
+  "query_metadata": {
+    "block_range_queried": 50,
+    "blocks_checked": 0,
+    "queried_at": "2025-08-25T16:47:16.179578"
+  }
+}

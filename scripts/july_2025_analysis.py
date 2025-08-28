@@ -14,341 +14,382 @@ from typing import Dict, List, Tuple
 import sys
 
 # Add shared directory to path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from shared.token_name_resolver import TokenNameResolver
+
 
 class July2025Analyzer:
     def __init__(self):
         self.token_resolver = TokenNameResolver()
-        self.trade_pairs = defaultdict(lambda: defaultdict(float))  # pair -> affiliate -> volume
+        self.trade_pairs = defaultdict(
+            lambda: defaultdict(float)
+        )  # pair -> affiliate -> volume
         self.affiliate_volumes = defaultdict(float)
         self.total_volumes = defaultdict(float)
-        
+
         # July 2025 date range
         self.july_start = datetime(2025, 7, 1)
         self.july_end = datetime(2025, 7, 31)
-        
+
     def analyze_thorchain_july(self):
         """Analyze THORChain July 2025 data"""
         print("🔍 Analyzing THORChain July 2025 data...")
-        
+
         try:
-            df = pd.read_csv('webscrape/viewblock_thorchain_combined_dedup_2025-07-29.csv')
-            
+            df = pd.read_csv(
+                "webscrape/viewblock_thorchain_combined_dedup_2025-07-29.csv"
+            )
+
             # Convert human-readable timestamps to datetime
-            df['timestamp'] = pd.to_datetime(df['timestamp'], format='%b %d %Y %I:%M:%S %p (GMT-7)', errors='coerce')
-            
+            df["timestamp"] = pd.to_datetime(
+                df["timestamp"], format="%b %d %Y %I:%M:%S %p (GMT-7)", errors="coerce"
+            )
+
             # Filter for July 2025
-            july_mask = (df['timestamp'] >= self.july_start) & (df['timestamp'] <= self.july_end)
+            july_mask = (df["timestamp"] >= self.july_start) & (
+                df["timestamp"] <= self.july_end
+            )
             july_df = df[july_mask]
-            
+
             print(f"   📊 Found {len(july_df)} July 2025 THORChain transactions")
-            
+
             for _, row in july_df.iterrows():
-                from_asset = str(row['from_asset']).strip()
-                to_asset = str(row['to_asset']).strip()
-                
+                from_asset = str(row["from_asset"]).strip()
+                to_asset = str(row["to_asset"]).strip()
+
                 if from_asset and to_asset and from_asset != to_asset:
                     pair = f"{from_asset}/{to_asset}"
-                    
+
                     # Get volume (use from_amount as volume)
                     try:
-                        volume = float(row['from_amount']) if pd.notna(row['from_amount']) else 0
+                        volume = (
+                            float(row["from_amount"])
+                            if pd.notna(row["from_amount"])
+                            else 0
+                        )
                     except:
                         volume = 0
-                    
+
                     # Use affiliate address from the data
-                    affiliate = row.get('affiliate_address', 'THORChain')
-                    
+                    affiliate = row.get("affiliate_address", "THORChain")
+
                     self.trade_pairs[pair][affiliate] += volume
                     self.affiliate_volumes[affiliate] += volume
                     self.total_volumes[pair] += volume
-                    
+
         except Exception as e:
             print(f"   ❌ Error analyzing THORChain July data: {e}")
-    
+
     def analyze_cowswap_july(self):
         """Analyze CowSwap July 2025 data"""
         print("🔍 Analyzing CowSwap July 2025 data...")
-        
+
         try:
-            df = pd.read_excel('webscrape/CoW Swap Partner Dashboard Table.xlsx')
-            
+            df = pd.read_excel("webscrape/CoW Swap Partner Dashboard Table.xlsx")
+
             # Convert Block Time to datetime
-            df['Block Time'] = pd.to_datetime(df['Block Time'], errors='coerce')
-            
+            df["Block Time"] = pd.to_datetime(df["Block Time"], errors="coerce")
+
             # Filter for July 2025
-            july_mask = (df['Block Time'] >= self.july_start) & (df['Block Time'] <= self.july_end)
+            july_mask = (df["Block Time"] >= self.july_start) & (
+                df["Block Time"] <= self.july_end
+            )
             july_df = df[july_mask]
-            
+
             print(f"   📊 Found {len(july_df)} July 2025 CowSwap transactions")
-            
+
             for _, row in july_df.iterrows():
-                sell_token = str(row['Sell Token']).strip()
-                buy_token = str(row['Buy Token']).strip()
-                
+                sell_token = str(row["Sell Token"]).strip()
+                buy_token = str(row["Buy Token"]).strip()
+
                 if sell_token and buy_token and sell_token != buy_token:
                     pair = f"{sell_token}/{buy_token}"
-                    
+
                     # Get volume from USD Value column
                     try:
-                        volume = float(row['USD Value']) if pd.notna(row['USD Value']) else 0
+                        volume = (
+                            float(row["USD Value"]) if pd.notna(row["USD Value"]) else 0
+                        )
                     except:
                         volume = 0
-                    
+
                     # Use CowSwap as affiliate
                     affiliate = "CowSwap"
-                    
+
                     self.trade_pairs[pair][affiliate] += volume
                     self.affiliate_volumes[affiliate] += volume
                     self.total_volumes[pair] += volume
-                    
+
         except Exception as e:
             print(f"   ❌ Error analyzing CowSwap July data: {e}")
-    
+
     def analyze_relay_july(self):
         """Analyze Relay July 2025 data"""
         print("🔍 Analyzing Relay July 2025 data...")
-        
+
         try:
-            conn = sqlite3.connect('databases/affiliate.db')
+            conn = sqlite3.connect("databases/affiliate.db")
             cursor = conn.cursor()
-            
+
             # Check if timestamp column exists
             cursor.execute("PRAGMA table_info(relay_affiliate_fees)")
             columns = [row[1] for row in cursor.fetchall()]
-            
-            if 'timestamp' in columns:
+
+            if "timestamp" in columns:
                 # Convert July dates to timestamps
                 july_start_ts = int(self.july_start.timestamp())
                 july_end_ts = int(self.july_end.timestamp())
-                
+
                 query = """
                     SELECT token_address_name, amount, timestamp
                     FROM relay_affiliate_fees 
                     WHERE timestamp >= ? AND timestamp <= ?
                     AND token_address_name IS NOT NULL
                 """
-                
+
                 cursor.execute(query, (july_start_ts, july_end_ts))
                 results = cursor.fetchall()
-                
+
                 print(f"   📊 Found {len(results)} July 2025 Relay transactions")
-                
+
                 for token_name, amount_str, timestamp in results:
-                    if token_name and token_name != 'ETH':
+                    if token_name and token_name != "ETH":
                         pair = f"ETH/{token_name}"
-                        
+
                         try:
                             volume = float(amount_str) / 1e18  # Convert from wei to ETH
                         except:
                             volume = 0
-                        
+
                         affiliate = "Relay"
-                        
+
                         self.trade_pairs[pair][affiliate] += volume
                         self.affiliate_volumes[affiliate] += volume
                         self.total_volumes[pair] += volume
-                        
+
             conn.close()
-            
+
         except Exception as e:
             print(f"   ❌ Error analyzing Relay July data: {e}")
-    
+
     def analyze_portals_july(self):
         """Analyze Portals July 2025 data"""
         print("🔍 Analyzing Portals July 2025 data...")
-        
+
         try:
-            conn = sqlite3.connect('databases/portals_transactions.db')
+            conn = sqlite3.connect("databases/portals_transactions.db")
             cursor = conn.cursor()
-            
+
             # Check if block_timestamp column exists
             cursor.execute("PRAGMA table_info(portals_transactions)")
             columns = [row[1] for row in cursor.fetchall()]
-            
-            if 'block_timestamp' in columns:
+
+            if "block_timestamp" in columns:
                 # Convert July dates to timestamps
                 july_start_ts = int(self.july_start.timestamp())
                 july_end_ts = int(self.july_end.timestamp())
-                
+
                 query = """
                     SELECT input_token_name, output_token_name, input_amount, output_amount, block_timestamp
                     FROM portals_transactions 
                     WHERE block_timestamp >= ? AND block_timestamp <= ?
                     AND input_token_name IS NOT NULL AND output_token_name IS NOT NULL
                 """
-                
+
                 cursor.execute(query, (july_start_ts, july_end_ts))
                 results = cursor.fetchall()
-                
+
                 print(f"   📊 Found {len(results)} July 2025 Portals transactions")
-                
-                for input_token, output_token, input_amount, output_amount, timestamp in results:
+
+                for (
+                    input_token,
+                    output_token,
+                    input_amount,
+                    output_amount,
+                    timestamp,
+                ) in results:
                     if input_token and output_token:
                         pair = f"{input_token}/{output_token}"
-                        
+
                         try:
                             # Use input amount as volume
                             volume = float(input_amount) if input_amount else 0
                         except:
                             volume = 0
-                        
+
                         affiliate = "Portals"
-                        
+
                         self.trade_pairs[pair][affiliate] += volume
                         self.affiliate_volumes[affiliate] += volume
                         self.total_volumes[pair] += volume
-                        
+
             conn.close()
-            
+
         except Exception as e:
             print(f"   ❌ Error analyzing Portals July data: {e}")
-    
+
     def analyze_chainflip_july(self):
         """Analyze Chainflip July 2025 data"""
         print("🔍 Analyzing Chainflip July 2025 data...")
-        
+
         try:
-            conn = sqlite3.connect('databases/chainflip_transactions.db')
+            conn = sqlite3.connect("databases/chainflip_transactions.db")
             cursor = conn.cursor()
-            
+
             # Check if timestamp column exists
             cursor.execute("PRAGMA table_info(chainflip_transactions)")
             columns = [row[1] for row in cursor.fetchall()]
-            
-            if 'timestamp' in columns:
+
+            if "timestamp" in columns:
                 # Convert July dates to timestamps
                 july_start_ts = int(self.july_start.timestamp())
                 july_end_ts = int(self.july_end.timestamp())
-                
+
                 query = """
                     SELECT source_asset_name, destination_asset_name, swap_amount, timestamp
                     FROM chainflip_transactions 
                     WHERE timestamp >= ? AND timestamp <= ?
                     AND source_asset_name IS NOT NULL AND destination_asset_name IS NOT NULL
                 """
-                
+
                 cursor.execute(query, (july_start_ts, july_end_ts))
                 results = cursor.fetchall()
-                
+
                 print(f"   📊 Found {len(results)} July 2025 Chainflip transactions")
-                
+
                 for source_asset, dest_asset, swap_amount, timestamp in results:
                     if source_asset and dest_asset:
                         pair = f"{source_asset}/{dest_asset}"
-                        
+
                         try:
                             volume = float(swap_amount) if swap_amount else 0
                         except:
                             volume = 0
-                        
+
                         affiliate = "Chainflip"
-                        
+
                         self.trade_pairs[pair][affiliate] += volume
                         self.affiliate_volumes[affiliate] += volume
                         self.total_volumes[pair] += volume
-                        
+
             conn.close()
-            
+
         except Exception as e:
             print(f"   ❌ Error analyzing Chainflip July data: {e}")
-    
+
     def generate_july_report(self):
         """Generate July 2025 analysis report"""
-        print("\n" + "="*80)
+        print("\n" + "=" * 80)
         print("📊 JULY 2025 TRADE PAIR ANALYSIS")
-        print("="*80)
-        
+        print("=" * 80)
+
         if not self.trade_pairs:
             print("❌ No July 2025 data found")
             return
-        
+
         # Get top 10 trade pairs by total volume
-        top_pairs = sorted(self.total_volumes.items(), key=lambda x: x[1], reverse=True)[:10]
-        
+        top_pairs = sorted(
+            self.total_volumes.items(), key=lambda x: x[1], reverse=True
+        )[:10]
+
         print(f"\n🏆 TOP 10 TRADE PAIRS IN JULY 2025:")
         print("-" * 60)
         for i, (pair, total_volume) in enumerate(top_pairs, 1):
             print(f"{i:2d}. {pair:30s}: {total_volume:12,.2f} volume")
-        
+
         # Detailed breakdown for top pairs
         print(f"\n📋 DETAILED BREAKDOWN FOR TOP PAIRS:")
         print("-" * 60)
-        
+
         for pair, total_volume in top_pairs:
             print(f"\n{pair}:")
-            
+
             # Get affiliate breakdown for this pair
             affiliate_data = self.trade_pairs[pair]
-            
+
             if affiliate_data:
                 # Sort affiliates by volume
-                sorted_affiliates = sorted(affiliate_data.items(), key=lambda x: x[1], reverse=True)
-                
+                sorted_affiliates = sorted(
+                    affiliate_data.items(), key=lambda x: x[1], reverse=True
+                )
+
                 for affiliate, volume in sorted_affiliates:
-                    percentage = (volume / total_volume * 100) if total_volume > 0 else 0
+                    percentage = (
+                        (volume / total_volume * 100) if total_volume > 0 else 0
+                    )
                     print(f"   {affiliate:15s}: {volume:10,.2f} ({percentage:5.1f}%)")
-                
+
                 # Show highest percentage affiliate
                 top_affiliate, top_volume = sorted_affiliates[0]
-                top_percentage = (top_volume / total_volume * 100) if total_volume > 0 else 0
+                top_percentage = (
+                    (top_volume / total_volume * 100) if total_volume > 0 else 0
+                )
                 print(f"   🏆 Highest: {top_affiliate} ({top_percentage:.1f}%)")
-        
+
         # Overall affiliate statistics
         print(f"\n📊 OVERALL AFFILIATE STATISTICS:")
         print("-" * 50)
         total_overall_volume = sum(self.total_volumes.values())
-        
-        for affiliate, volume in sorted(self.affiliate_volumes.items(), key=lambda x: x[1], reverse=True):
-            percentage = (volume / total_overall_volume * 100) if total_overall_volume > 0 else 0
+
+        for affiliate, volume in sorted(
+            self.affiliate_volumes.items(), key=lambda x: x[1], reverse=True
+        ):
+            percentage = (
+                (volume / total_overall_volume * 100) if total_overall_volume > 0 else 0
+            )
             print(f"{affiliate:15s}: {volume:12,.2f} ({percentage:5.1f}%)")
-        
+
         # Save detailed results
         self.save_july_results()
-    
+
     def save_july_results(self):
         """Save July analysis results"""
         results = {
-            'july_2025_analysis': {
-                'date_range': {
-                    'start': self.july_start.isoformat(),
-                    'end': self.july_end.isoformat()
+            "july_2025_analysis": {
+                "date_range": {
+                    "start": self.july_start.isoformat(),
+                    "end": self.july_end.isoformat(),
                 },
-                'top_pairs': dict(sorted(self.total_volumes.items(), key=lambda x: x[1], reverse=True)[:20]),
-                'affiliate_breakdown': dict(self.trade_pairs),
-                'affiliate_totals': dict(self.affiliate_volumes),
-                'summary': {
-                    'total_unique_pairs': len(self.trade_pairs),
-                    'total_volume': sum(self.total_volumes.values()),
-                    'total_affiliates': len(self.affiliate_volumes)
-                }
+                "top_pairs": dict(
+                    sorted(
+                        self.total_volumes.items(), key=lambda x: x[1], reverse=True
+                    )[:20]
+                ),
+                "affiliate_breakdown": dict(self.trade_pairs),
+                "affiliate_totals": dict(self.affiliate_volumes),
+                "summary": {
+                    "total_unique_pairs": len(self.trade_pairs),
+                    "total_volume": sum(self.total_volumes.values()),
+                    "total_affiliates": len(self.affiliate_volumes),
+                },
             }
         }
-        
-        with open('july_2025_analysis_results.json', 'w') as f:
+
+        with open("july_2025_analysis_results.json", "w") as f:
             json.dump(results, f, indent=2)
-        
+
         print(f"\n💾 July 2025 results saved to: july_2025_analysis_results.json")
-    
+
     def run_analysis(self):
         """Run complete July 2025 analysis"""
         print("🚀 Starting July 2025 trade pair analysis...")
-        
+
         # Analyze all data sources for July 2025
         self.analyze_thorchain_july()
         self.analyze_cowswap_july()
         self.analyze_relay_july()
         self.analyze_portals_july()
         self.analyze_chainflip_july()
-        
+
         # Generate report
         self.generate_july_report()
+
 
 def main():
     """Main function"""
     analyzer = July2025Analyzer()
     analyzer.run_analysis()
 
+
 if __name__ == "__main__":
-    main() 
+    main()

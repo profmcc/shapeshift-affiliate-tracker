@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Chainflip Transaction Scraper",
+  "version": "2.0",
+  "description": "Capture Chainflip broker transaction data with a floating, draggable UI",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://scan.chainflip.io/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://scan.chainflip.io/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Chainflip Scraper"
+  }
+}

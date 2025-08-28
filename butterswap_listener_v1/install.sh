@@ -59,3 +59,5 @@ if [ $? -eq 0 ]; then
 else
     echo "⚠️ Installation completed but tests failed. Check the errors above."
 fi
+
+

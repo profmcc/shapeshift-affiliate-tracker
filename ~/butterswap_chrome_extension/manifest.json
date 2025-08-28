@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "ButterSwap Web Scraper",
+  "version": "1.0.0",
+  "description": "Scrapes transaction data from ButterSwap explorer with copy-paste address handling",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://explorer.butterswap.io/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://explorer.butterswap.io/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ButterSwap Scraper"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
+

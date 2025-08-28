@@ -13,7 +13,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Add project root to path for module imports
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+
 
 def debug_transfer_detection():
     """
@@ -23,7 +24,11 @@ def debug_transfer_detection():
 
     try:
         # Connect to Base chain
-        w3 = Web3(Web3.HTTPProvider('https://base-mainnet.infura.io/v3/208a3474635e4ebe8ee409cef3fbcd40'))
+        w3 = Web3(
+            Web3.HTTPProvider(
+                "https://base-mainnet.infura.io/v3/208a3474635e4ebe8ee409cef3fbcd40"
+            )
+        )
         if not w3.is_connected():
             print("❌ Failed to connect to Base chain")
             return
@@ -39,37 +44,39 @@ def debug_transfer_detection():
         print(f"📊 Transaction receipt found with {len(receipt['logs'])} logs")
 
         # Expected ERC-20 transfer signature
-        expected_signature = "ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        expected_signature = (
+            "ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        )
         print(f"🔍 Expected signature: {expected_signature}")
 
         # Analyze each log for transfer detection
         transfer_count = 0
-        for i, log in enumerate(receipt['logs']):
+        for i, log in enumerate(receipt["logs"]):
             print(f"\n📋 Log {i}:")
             print(f"   Address: {log['address']}")
             print(f"   Topics: {len(log['topics'])}")
-            
-            if len(log['topics']) >= 3:
-                topic0 = log['topics'][0].hex()
+
+            if len(log["topics"]) >= 3:
+                topic0 = log["topics"][0].hex()
                 print(f"   Topic 0: {topic0}")
                 print(f"   Expected: {expected_signature}")
                 print(f"   Match: {topic0 == expected_signature}")
-                
+
                 if topic0 == expected_signature:
                     print(f"   ✅ This is an ERC-20 transfer!")
                     transfer_count += 1
-                    
+
                     # Parse from and to addresses
-                    from_addr = '0x' + log['topics'][1][-40:].hex()
-                    to_addr = '0x' + log['topics'][2][-40:].hex()
-                    
+                    from_addr = "0x" + log["topics"][1][-40:].hex()
+                    to_addr = "0x" + log["topics"][2][-40:].hex()
+
                     print(f"   From: {from_addr}")
                     print(f"   To: {to_addr}")
-                    
+
                     # Parse amount
-                    if len(log['data']) >= 32:
+                    if len(log["data"]) >= 32:
                         try:
-                            amount = int.from_bytes(log['data'][:32], 'big')
+                            amount = int.from_bytes(log["data"][:32], "big")
                             print(f"   Amount: {amount}")
                         except Exception as e:
                             print(f"   ❌ Error parsing amount: {e}")
@@ -87,7 +94,9 @@ def debug_transfer_detection():
     except Exception as e:
         print(f"❌ Analysis failed: {e}")
         import traceback
+
         traceback.print_exc()
 
+
 if __name__ == "__main__":
-    debug_transfer_detection() 
+    debug_transfer_detection()

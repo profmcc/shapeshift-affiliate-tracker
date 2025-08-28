@@ -18,7 +18,7 @@ def test_imports():
     from shapeshift_listener.core.config import Config
     from shapeshift_listener.core.base import BaseListener
     from shapeshift_listener.core.listener_manager import ListenerManager
-    
+
     assert Config is not None
     assert BaseListener is not None
     assert ListenerManager is not None
@@ -27,7 +27,7 @@ def test_imports():
 def test_config_creation():
     """Test that Config can be created."""
     from shapeshift_listener.core.config import Config
-    
+
     config = Config()
     assert config.rpc_rate_limit_per_second == 10
     assert config.batch_size == 100

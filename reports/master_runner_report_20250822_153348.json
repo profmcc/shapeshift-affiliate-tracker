@@ -1,0 +1,36 @@
+{
+  "execution_summary": {
+    "start_time": "2025-08-22T15:33:38.002688",
+    "end_time": "2025-08-22T15:33:48.077662",
+    "duration_seconds": 10.074974,
+    "total_transactions": 0,
+    "successful_listeners": 0,
+    "total_listeners": 5
+  },
+  "protocol_summary": {
+    "butterswap": {
+      "transactions": 0,
+      "file_path": "csv_data/butterswap_transactions.csv"
+    },
+    "relay": {
+      "transactions": 1341,
+      "file_path": "csv_data/relay_transactions.csv"
+    },
+    "cowswap": {
+      "transactions": 0,
+      "file_path": "csv_data/cowswap_transactions.csv"
+    },
+    "portals": {
+      "transactions": 0,
+      "file_path": "csv_data/portals_transactions.csv"
+    },
+    "thorchain": {
+      "transactions": 0,
+      "file_path": "csv_data/thorchain_transactions.csv"
+    }
+  },
+  "consolidated_data": {
+    "file_path": "csv_data/consolidated_affiliate_transactions.csv",
+    "total_transactions": 1341
+  }
+}

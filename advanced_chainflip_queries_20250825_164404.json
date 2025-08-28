@@ -1,0 +1,50 @@
+[
+  {
+    "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+    "queried_at": "2025-08-25T16:43:58.096093",
+    "chain_head": {
+      "parentHash": "0xf7111ecf7d3e984335f1f8518d4f33042f0f83698b8a7e451f877d78d7af1554",
+      "number": "0x8e35e2",
+      "stateRoot": "0xbf26e8babc718d8f06340493b9a807645f9ad687a61c0406faf232a56eb9cdb7",
+      "extrinsicsRoot": "0x79990c9c7687a00be3f055f66c8d994de9fd577a4c7575276da68529eeb9d665",
+      "digest": {
+        "logs": [
+          "0x066175726120df28721100000000",
+          "0x05617572610101002a23aff46640a7ae390b1623172163c06be6a792af98bab815e76f3ab4b108526abd2f5e360df596e3f016c0e4c7feb8f87833ff2415c379afbbc94c0eea84"
+        ]
+      }
+    },
+    "account_info": null,
+    "broker_registration": {
+      "nonce": 0,
+      "is_active": false
+    },
+    "broker_swaps": null,
+    "account_balance": null,
+    "broker_name": "ShapeShift Broker 1"
+  },
+  {
+    "address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+    "queried_at": "2025-08-25T16:44:01.134126",
+    "chain_head": {
+      "parentHash": "0xf7111ecf7d3e984335f1f8518d4f33042f0f83698b8a7e451f877d78d7af1554",
+      "number": "0x8e35e2",
+      "stateRoot": "0xbf26e8babc718d8f06340493b9a807645f9ad687a61c0406faf232a56eb9cdb7",
+      "extrinsicsRoot": "0x79990c9c7687a00be3f055f66c8d994de9fd577a4c7575276da68529eeb9d665",
+      "digest": {
+        "logs": [
+          "0x066175726120df28721100000000",
+          "0x05617572610101002a23aff46640a7ae390b1623172163c06be6a792af98bab815e76f3ab4b108526abd2f5e360df596e3f016c0e4c7feb8f87833ff2415c379afbbc94c0eea84"
+        ]
+      }
+    },
+    "account_info": null,
+    "broker_registration": {
+      "nonce": 6,
+      "is_active": true
+    },
+    "broker_swaps": null,
+    "account_balance": null,
+    "broker_name": "ShapeShift Broker 2"
+  }
+]

@@ -1,0 +1,93 @@
+# Crypto Transaction Scraper Configuration
+
+# API Configuration
+api:
+  firecrawl_api_key: "${FIRECRAWL_API_KEY}"  # Set via environment variable
+  timeout: 120000  # milliseconds
+  rate_limit_delay: 2.0  # seconds between requests
+
+# Scraping Configuration
+scraping:
+  # Default selectors for finding crypto addresses
+  target_selectors:
+    - '[title*="0x"]'  # Elements with title containing hex addresses
+    - '[data-tooltip*="0x"]'  # Tooltip data attributes
+    - '[data-address]'  # Elements with address data
+    - '.address'  # Common address class
+    - '.hash'  # Common hash class
+    - '.tx-hash'  # Transaction hash class
+    - '[onmouseover*="0x"]'  # Mouse over events
+    - '[onmouseenter*="0x"]'  # Mouse enter events
+    - '.contract-address'  # Contract address class
+    - '.wallet-address'  # Wallet address class
+    - '[data-clipboard-text]'  # Elements with clipboard text
+  
+  # Wait times for page interactions
+  wait_times:
+    page_load: 2000  # milliseconds
+    hover_delay: 500  # milliseconds
+    screenshot_delay: 200  # milliseconds
+    scroll_delay: 1000  # milliseconds
+  
+  # Screenshot settings
+  screenshots:
+    full_page: false
+    capture_hover: true
+
+# Network Detection
+networks:
+  ethereum:
+    domains: ['etherscan.io', 'etherscan.com', 'ethplorer.io']
+    address_pattern: '0x[a-fA-F0-9]{40}'
+    tx_pattern: '0x[a-fA-F0-9]{64}'
+  
+  polygon:
+    domains: ['polygonscan.com', 'polygon.etherscan.io']
+    address_pattern: '0x[a-fA-F0-9]{40}'
+    tx_pattern: '0x[a-fA-F0-9]{64}'
+  
+  bsc:
+    domains: ['bscscan.com', 'bscscan.io']
+    address_pattern: '0x[a-fA-F0-9]{40}'
+    tx_pattern: '0x[a-fA-F0-9]{64}'
+  
+  arbitrum:
+    domains: ['arbiscan.io', 'arbitrum.etherscan.io']
+    address_pattern: '0x[a-fA-F0-9]{40}'
+    tx_pattern: '0x[a-fA-F0-9]{64}'
+  
+  bitcoin:
+    domains: ['blockchain.com', 'blockstream.info', 'mempool.space']
+    address_pattern: '[13][a-km-zA-HJ-NP-Z1-9]{25,34}|bc1[a-z0-9]{39,59}'
+    tx_pattern: '[a-fA-F0-9]{64}'
+  
+  solana:
+    domains: ['solscan.io', 'explorer.solana.com', 'solscan.io']
+    address_pattern: '[1-9A-HJ-NP-Za-km-z]{32,44}'
+    tx_pattern: '[1-9A-HJ-NP-Za-km-z]{64,88}'
+
+# Output Configuration
+output:
+  format: 'json'  # json, csv, txt
+  include_html: false  # Include raw HTML in output
+  include_markdown: true  # Include markdown in output
+  include_screenshots: true  # Include screenshot URLs
+  include_metadata: true  # Include page metadata
+  
+  # File naming
+  filename_template: 'crypto_scraping_results_{timestamp}'
+  timestamp_format: '%Y%m%d_%H%M%S'
+
+# Logging Configuration
+logging:
+  level: 'INFO'  # DEBUG, INFO, WARNING, ERROR
+  format: '%(asctime)s - %(levelname)s - %(message)s'
+  file: 'crypto_scraper.log'
+  console: true
+
+# Example URLs for testing
+example_urls:
+  - "https://etherscan.io/tx/0x0840bba848e991cdcfbf2b71b8e1cb94fb72d6343ad4bb182f7ee1c48612221d"
+  - "https://polygonscan.com/tx/0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+  - "https://bscscan.com/tx/0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+

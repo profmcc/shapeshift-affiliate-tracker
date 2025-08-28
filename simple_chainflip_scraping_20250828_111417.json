@@ -1,0 +1,102 @@
+[
+  {
+    "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+    "url": "https://scan.chainflip.io/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+    "status_code": 200,
+    "balance_info": {
+      "balance": null,
+      "currency": null,
+      "balance_elements": []
+    },
+    "transaction_info": {
+      "transaction_count": null,
+      "last_transaction": null,
+      "volume": null,
+      "fees": null
+    },
+    "embedded_data": {
+      "json_blocks": [
+        {
+          "props": {
+            "pageProps": {}
+          },
+          "page": "/brokers/[id]",
+          "query": {},
+          "buildId": "v1.10.18",
+          "nextExport": true,
+          "autoExport": true,
+          "isFallback": false,
+          "scriptLoader": []
+        }
+      ],
+      "script_data": [
+        {
+          "props": {
+            "pageProps": {}
+          },
+          "page": "/brokers/[id]",
+          "query": {},
+          "buildId": "v1.10.18",
+          "nextExport": true,
+          "autoExport": true,
+          "isFallback": false,
+          "scriptLoader": []
+        }
+      ]
+    },
+    "page_length": 2859,
+    "queried_at": "2025-08-28T11:14:11.943351",
+    "broker_name": "ShapeShift Broker 1",
+    "broker_address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi"
+  },
+  {
+    "address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+    "url": "https://scan.chainflip.io/brokers/cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+    "status_code": 200,
+    "balance_info": {
+      "balance": null,
+      "currency": null,
+      "balance_elements": []
+    },
+    "transaction_info": {
+      "transaction_count": null,
+      "last_transaction": null,
+      "volume": null,
+      "fees": null
+    },
+    "embedded_data": {
+      "json_blocks": [
+        {
+          "props": {
+            "pageProps": {}
+          },
+          "page": "/brokers/[id]",
+          "query": {},
+          "buildId": "v1.10.18",
+          "nextExport": true,
+          "autoExport": true,
+          "isFallback": false,
+          "scriptLoader": []
+        }
+      ],
+      "script_data": [
+        {
+          "props": {
+            "pageProps": {}
+          },
+          "page": "/brokers/[id]",
+          "query": {},
+          "buildId": "v1.10.18",
+          "nextExport": true,
+          "autoExport": true,
+          "isFallback": false,
+          "scriptLoader": []
+        }
+      ]
+    },
+    "page_length": 2859,
+    "queried_at": "2025-08-28T11:14:15.106936",
+    "broker_name": "ShapeShift Broker 2",
+    "broker_address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8"
+  }
+]

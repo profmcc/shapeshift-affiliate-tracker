@@ -1,0 +1,28 @@
+[
+  {
+    "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+    "scraped_at": "2025-08-25T16:34:00.528183",
+    "page_title": "",
+    "broker_name": "",
+    "total_volume": "",
+    "total_fees": "",
+    "swap_count": "",
+    "last_activity": "",
+    "status": "",
+    "raw_html": "<!DOCTYPE html><html><head><meta charSet=\"utf-8\" data-next-head=\"\"/><meta name=\"viewport\" content=\"width=device-width\" data-next-head=\"\"/><link rel=\"icon\" href=\"/chainflip-favicon.ico\" sizes=\"any\" data-next-head=\"\"/><link rel=\"icon\" href=\"/chainflip-favicon.svg\" type=\"image/svg+xml\" data-next-head=\"\"/><link rel=\"canonical\" href=\"https://scan.chainflip.io/brokers/[id]\" data-next-head=\"\"/><link data-next-font=\"\" rel=\"preconnect\" href=\"/\" crossorigin=\"anonymous\"/><link rel=\"preload\" href=\"/_next/static/css/ccd051903abb36bc.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/ccd051903abb36bc.css\" data-n-g=\"\"/><noscript data-n-css=\"\"></noscript><script defer=\"\" nomodule=\"\" src=\"/_next/static/chunks/polyfills-42372ed130431b0a.js\"></script><script src=\"/_next/static/chunks/webpack-6b9572cf4d34d306.js\" defer=\"\"></script><script src=\"/_next/static/chunks/framework-5424fe5391fa8bac.js\" defer=\"\"></script><script src=\"/_next/static/chunks/main-b304023043497f28.js\" defer=\"\"></script><sc...",
+    "broker_name_from_config": "ShapeShift Broker 1"
+  },
+  {
+    "address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+    "scraped_at": "2025-08-25T16:34:03.759797",
+    "page_title": "",
+    "broker_name": "",
+    "total_volume": "",
+    "total_fees": "",
+    "swap_count": "",
+    "last_activity": "",
+    "status": "",
+    "raw_html": "<!DOCTYPE html><html><head><meta charSet=\"utf-8\" data-next-head=\"\"/><meta name=\"viewport\" content=\"width=device-width\" data-next-head=\"\"/><link rel=\"icon\" href=\"/chainflip-favicon.ico\" sizes=\"any\" data-next-head=\"\"/><link rel=\"icon\" href=\"/chainflip-favicon.svg\" type=\"image/svg+xml\" data-next-head=\"\"/><link rel=\"canonical\" href=\"https://scan.chainflip.io/brokers/[id]\" data-next-head=\"\"/><link data-next-font=\"\" rel=\"preconnect\" href=\"/\" crossorigin=\"anonymous\"/><link rel=\"preload\" href=\"/_next/static/css/ccd051903abb36bc.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/ccd051903abb36bc.css\" data-n-g=\"\"/><noscript data-n-css=\"\"></noscript><script defer=\"\" nomodule=\"\" src=\"/_next/static/chunks/polyfills-42372ed130431b0a.js\"></script><script src=\"/_next/static/chunks/webpack-6b9572cf4d34d306.js\" defer=\"\"></script><script src=\"/_next/static/chunks/framework-5424fe5391fa8bac.js\" defer=\"\"></script><script src=\"/_next/static/chunks/main-b304023043497f28.js\" defer=\"\"></script><sc...",
+    "broker_name_from_config": "ShapeShift Broker 2"
+  }
+]

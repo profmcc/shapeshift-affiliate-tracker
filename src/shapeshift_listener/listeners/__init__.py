@@ -3,16 +3,17 @@ Protocol-specific listeners for affiliate fee monitoring.
 """
 
 from .butterswap import ButterSwapListener
-from .relay import RelayListener
+from .chainflip import ChainflipListener
 from .cowswap import CoWSwapListener
 from .portals import PortalsListener
+from .relay import RelayListener
 from .thorchain import ThorChainListener
 
 __all__ = [
     "ButterSwapListener",
-    "RelayListener", 
+    "ChainflipListener",
+    "RelayListener",
     "CoWSwapListener",
     "PortalsListener",
-    "ThorChainListener"
+    "ThorChainListener",
 ]
-

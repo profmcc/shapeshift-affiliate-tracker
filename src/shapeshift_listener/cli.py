@@ -20,12 +20,12 @@ def setup_logging(level: str = "INFO", format_type: str = "json") -> None:
     if format_type == "json":
         logging.basicConfig(
             level=getattr(logging, level.upper()),
-            format='{"timestamp": "%(asctime)s", "level": "%(levelname)s", "name": "%(name)s", "message": "%(message)s"}'
+            format='{"timestamp": "%(asctime)s", "level": "%(levelname)s", "name": "%(name)s", "message": "%(message)s"}',
         )
     else:
         logging.basicConfig(
             level=getattr(logging, level.upper()),
-            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+            format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         )
 
 
@@ -47,17 +47,31 @@ Examples:
 
   # Check configuration
   ss-listener config --validate
-        """
+        """,
     )
 
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
     # Run command
     run_parser = subparsers.add_parser("run", help="Run a listener")
-    run_parser.add_argument("--chain", required=True, help="Chain to monitor (e.g., arbitrum, base, ethereum)")
+    run_parser.add_argument(
+        "--chain",
+        required=True,
+        help="Chain to monitor (e.g., arbitrum, base, ethereum)",
+    )
     run_parser.add_argument("--from-block", type=int, help="Starting block number")
-    run_parser.add_argument("--sink", default="stdout", choices=["stdout", "csv", "database"], help="Output destination")
-    run_parser.add_argument("--log-level", default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR"], help="Log level")
+    run_parser.add_argument(
+        "--sink",
+        default="stdout",
+        choices=["stdout", "csv", "database"],
+        help="Output destination",
+    )
+    run_parser.add_argument(
+        "--log-level",
+        default="INFO",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+        help="Log level",
+    )
     run_parser.add_argument("--config", type=Path, help="Path to configuration file")
 
     # List chains command
@@ -65,8 +79,12 @@ Examples:
 
     # Config command
     config_parser = subparsers.add_parser("config", help="Configuration management")
-    config_parser.add_argument("--validate", action="store_true", help="Validate configuration")
-    config_parser.add_argument("--show", action="store_true", help="Show current configuration")
+    config_parser.add_argument(
+        "--validate", action="store_true", help="Validate configuration"
+    )
+    config_parser.add_argument(
+        "--show", action="store_true", help="Show current configuration"
+    )
 
     # Version command
     subparsers.add_parser("version", help="Show version information")
@@ -84,11 +102,14 @@ async def run_listener(args: argparse.Namespace) -> None:
         setup_logging(args.log_level)
         logger = logging.getLogger(__name__)
 
-        logger.info("Starting ShapeShift Affiliate Listener", extra={
-            "chain": args.chain,
-            "from_block": args.from_block,
-            "sink": args.sink
-        })
+        logger.info(
+            "Starting ShapeShift Affiliate Listener",
+            extra={
+                "chain": args.chain,
+                "from_block": args.from_block,
+                "sink": args.sink,
+            },
+        )
 
         # Initialize and run listener manager
         manager = ListenerManager(config)
@@ -114,7 +135,9 @@ def list_chains() -> None:
     print("Available Chains:")
     print("================")
     for chain in chains:
-        print(f"{chain['name']:<12} (ID: {chain['chain_id']:<6}) - {chain['description']}")
+        print(
+            f"{chain['name']:<12} (ID: {chain['chain_id']:<6}) - {chain['description']}"
+        )
 
 
 def show_config(args: argparse.Namespace) -> None:
@@ -143,6 +166,7 @@ def show_config(args: argparse.Namespace) -> None:
 def show_version() -> None:
     """Show version information."""
     from . import __author__, __license__, __version__
+
     print(f"ShapeShift Affiliate Listener v{__version__}")
     print(f"Author: {__author__}")
     print(f"License: {__license__}")

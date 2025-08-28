@@ -1,0 +1,46 @@
+{
+  "queried_at": "2025-08-28T11:23:04.303940",
+  "addresses": {
+    "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi": [
+      {
+        "endpoint": "wss://rpc.chainflip.io",
+        "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+        "queried_at": "2025-08-28T11:23:04.338403",
+        "error": "BaseEventLoop.create_connection() got an unexpected keyword argument 'timeout'"
+      },
+      {
+        "endpoint": "wss://chainflip-rpc.publicnode.com",
+        "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+        "queried_at": "2025-08-28T11:23:05.340159",
+        "error": "BaseEventLoop.create_connection() got an unexpected keyword argument 'timeout'"
+      },
+      {
+        "endpoint": "wss://chainflip-rpc.dwellir.com",
+        "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+        "queried_at": "2025-08-28T11:23:06.341501",
+        "error": "BaseEventLoop.create_connection() got an unexpected keyword argument 'timeout'"
+      }
+    ],
+    "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8": [
+      {
+        "endpoint": "wss://rpc.chainflip.io",
+        "address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+        "queried_at": "2025-08-28T11:23:07.342325",
+        "error": "BaseEventLoop.create_connection() got an unexpected keyword argument 'timeout'"
+      },
+      {
+        "endpoint": "wss://chainflip-rpc.publicnode.com",
+        "address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+        "queried_at": "2025-08-28T11:23:08.343907",
+        "error": "BaseEventLoop.create_connection() got an unexpected keyword argument 'timeout'"
+      },
+      {
+        "endpoint": "wss://chainflip-rpc.dwellir.com",
+        "address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+        "queried_at": "2025-08-28T11:23:09.344316",
+        "error": "BaseEventLoop.create_connection() got an unexpected keyword argument 'timeout'"
+      }
+    ]
+  },
+  "endpoints_tested": 3
+}

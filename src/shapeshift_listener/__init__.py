@@ -13,4 +13,3 @@ from .core.base import BaseListener
 from .core.config import Config
 
 __all__ = ["BaseListener", "Config"]
-

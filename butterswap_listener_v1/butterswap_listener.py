@@ -163,60 +163,90 @@ class ButterSwapListener:
         end_block = min(start_block + max_blocks, self.w3.eth.block_number)
         
         print(f"🔍 Scanning blocks {start_block:,} to {end_block:,} ({max_blocks:,} blocks)")
+        print(f"🎯 Looking for affiliate address: {self.affiliate_address}")
+        print(f"📊 Verbose mode: Showing details for ALL transactions\n")
+        
+        total_txs = 0
+        affiliate_txs = 0
         
         for block_num in range(start_block, end_block + 1):
             try:
-                if block_num % 100 == 0:
+                if block_num % 10 == 0:  # Show progress every 10 blocks
                     print(f"   📍 Scanning block {block_num:,}...")
                 
                 block = self.w3.eth.get_block(block_num, full_transactions=True)
+                block_txs = len(block.transactions)
+                total_txs += block_txs
                 
-                for tx in block.transactions:
+                print(f"   📦 Block {block_num:,}: {block_txs} transactions")
+                
+                for tx_idx, tx in enumerate(block.transactions):
                     tx_hash = tx['hash'].hex()
-                    tx_data = {
-                        'block_number': block_num,
-                        'hash': tx_hash,
-                        'from': tx['from'],
-                        'to': tx['to'],
-                        'value': self.w3.from_wei(tx['value'], 'ether'),
-                        'gas_price': self.w3.from_wei(tx['gasPrice'], 'gwei'),
-                        'timestamp': block.timestamp,
-                        'detection_method': []
-                    }
                     
-                    # Method 1: Direct involvement
+                    # Show basic info for every transaction
+                    print(f"      🔍 TX {tx_idx+1}: {tx_hash[:10]}...")
+                    print(f"         From: {tx['from']}")
+                    print(f"         To: {tx['to']}")
+                    print(f"         Value: {self.w3.from_wei(tx['value'], 'ether')} ETH")
+                    
+                    # Check input data
+                    if tx['input'] and tx['input'] != '0x':
+                        try:
+                            input_data = tx['input']
+                            if isinstance(input_data, bytes):
+                                input_data = input_data.hex()
+                            input_preview = input_data[:100] + "..." if len(input_data) > 100 else input_data
+                            print(f"         Input: {input_preview}")
+                            
+                            # Check for affiliate address in input
+                            if self.affiliate_address[2:].lower() in input_data.lower():
+                                print(f"         🎯 AFFILIATE FOUND IN INPUT DATA!")
+                                affiliate_txs += 1
+                        except Exception as e:
+                            print(f"         Input: Error parsing - {e}")
+                    else:
+                        print(f"         Input: 0x (no data)")
+                    
+                    # Check for direct involvement
                     if (tx['from'] == self.affiliate_address or 
                         tx['to'] == self.affiliate_address):
-                        tx_data['detection_method'].append('direct_involvement')
-                        transactions.append(tx_data)
-                        continue
+                        print(f"         🎯 DIRECT AFFILIATE INVOLVEMENT!")
+                        affiliate_txs += 1
                     
-                    # Method 2: Check transaction data (calldata)
-                    if tx['input'] and tx['input'] != '0x':
-                        if self.affiliate_address[2:].lower() in tx['input'].lower():
-                            tx_data['detection_method'].append('in_calldata')
-                            transactions.append(tx_data)
-                            continue
-                    
-                    # Method 3: Check transaction receipt for events
+                    # Check transaction receipt for events
                     try:
                         receipt = self.w3.eth.get_transaction_receipt(tx_hash)
                         if receipt and receipt.logs:
-                            for log in receipt.logs:
-                                # Check if affiliate address appears in log data
-                                log_data = log.hex()
-                                if self.affiliate_address[2:].lower() in log_data.lower():
-                                    tx_data['detection_method'].append('in_logs')
-                                    transactions.append(tx_data)
-                                    break
-                    except Exception:
-                        pass
+                            print(f"         📝 Logs: {len(receipt.logs)} events")
+                            for log_idx, log in enumerate(receipt.logs[:3]):  # Show first 3 logs
+                                try:
+                                    log_data = log.hex()
+                                    log_preview = log_data[:80] + "..." if len(log_data) > 80 else log_data
+                                    print(f"            Log {log_idx+1}: {log_preview}")
+                                    
+                                    # Check for affiliate address in logs
+                                    if self.affiliate_address[2:].lower() in log_data.lower():
+                                        print(f"            🎯 AFFILIATE FOUND IN LOG DATA!")
+                                        affiliate_txs += 1
+                                except Exception as e:
+                                    print(f"            Log {log_idx+1}: Error parsing - {e}")
+                        else:
+                            print(f"         📝 Logs: None")
+                    except Exception as e:
+                        print(f"         📝 Logs: Error getting receipt - {e}")
+                    
+                    print()  # Empty line between transactions
                 
             except Exception as e:
                 logger.warning(f"Error scanning block {block_num}: {e}")
                 continue
         
-        print(f"✅ Scan complete! Found {len(transactions)} transactions")
+        print(f"📊 SCAN SUMMARY:")
+        print(f"   Total blocks scanned: {end_block - start_block + 1}")
+        print(f"   Total transactions processed: {total_txs:,}")
+        print(f"   Affiliate-related transactions found: {affiliate_txs}")
+        print(f"   Transactions saved: {len(transactions)}")
+        
         return transactions
     
     def save_transactions(self, transactions: List[Dict], filename: str = None) -> str:

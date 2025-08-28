@@ -1,0 +1,39 @@
+================================================================================
+TEST MASTER RUNNER SUMMARY REPORT
+================================================================================
+Generated: 2025-08-25 11:56:58
+
+TEST RESULTS SUMMARY:
+----------------------------------------
+test_chainflip_listener.py: ✅ PASS
+  - Transactions: 2
+  - Execution time: 0.21s
+test_cowswap_listener.py: ✅ PASS
+  - Transactions: 0
+  - Execution time: 78.10s
+test_portals_listener.py: ✅ PASS
+  - Transactions: 0
+  - Execution time: 60.65s
+test_butterswap_listener.py: ✅ PASS
+  - Transactions: 0
+  - Execution time: 120.07s
+
+Overall: 4/4 listeners passed
+Total transactions collected: 2
+
+CSV FILES STATUS:
+----------------------------------------
+test_chainflip_transactions.csv: ✅ 3 lines, 1179 bytes
+  Sample data:
+    1. chainflip,chainflip,19000000,0x1234567890123456789012345678901234567890123456789012345678901234,1756...
+    2. chainflip,chainflip,19000001,0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890,1756...
+test_cowswap_transactions.csv: ✅ 1 lines, 370 bytes
+test_portals_transactions.csv: ✅ 1 lines, 383 bytes
+test_butterswap_transactions.csv: ✅ 1 lines, 393 bytes
+
+RECOMMENDATIONS:
+----------------------------------------
+🎉 All test listeners are working correctly!
+✅ Ready for production use
+
+================================================================================

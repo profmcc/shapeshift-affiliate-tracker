@@ -1,0 +1,361 @@
+{
+  "timestamp": "2025-08-25T16:35:01.763836",
+  "discovered_endpoints": [
+    "https://scan.chainflip.io/_next/static/chunks/polyfills-42372ed130431b0a.js",
+    "https://scan.chainflip.io/_next/static/chunks/webpack-6b9572cf4d34d306.js",
+    "https://scan.chainflip.io/_next/static/chunks/framework-5424fe5391fa8bac.js",
+    "https://scan.chainflip.io/_next/static/chunks/main-b304023043497f28.js",
+    "https://scan.chainflip.io/_next/static/chunks/pages/_app-7374aec4dd691f12.js",
+    "https://scan.chainflip.io/_next/static/chunks/622-9fe670cb7906a106.js",
+    "https://scan.chainflip.io/_next/static/chunks/4795-01d3a742d36aba73.js",
+    "https://scan.chainflip.io/_next/static/chunks/9013-ee4d5e7ea99febe2.js",
+    "https://scan.chainflip.io/_next/static/chunks/279-0cd0610f97cad54e.js",
+    "https://scan.chainflip.io/_next/static/chunks/9677-998fbcf0210e078e.js",
+    "https://scan.chainflip.io/_next/static/chunks/8783-9668f29a9e138877.js",
+    "https://scan.chainflip.io/_next/static/chunks/9262-cea6d487d26693ed.js",
+    "https://scan.chainflip.io/_next/static/chunks/27-d8968d7c51526be0.js",
+    "https://scan.chainflip.io/_next/static/chunks/pages/brokers-e83a282a1a4443e6.js",
+    "https://scan.chainflip.io/_next/static/chunks/polyfills-42372ed130431b0a.js",
+    "https://scan.chainflip.io/_next/static/chunks/webpack-6b9572cf4d34d306.js",
+    "https://scan.chainflip.io/_next/static/chunks/framework-5424fe5391fa8bac.js",
+    "https://scan.chainflip.io/_next/static/chunks/main-b304023043497f28.js",
+    "https://scan.chainflip.io/_next/static/chunks/pages/_app-7374aec4dd691f12.js",
+    "https://scan.chainflip.io/_next/static/chunks/622-9fe670cb7906a106.js",
+    "https://scan.chainflip.io/_next/static/chunks/4795-01d3a742d36aba73.js",
+    "https://scan.chainflip.io/_next/static/chunks/9013-ee4d5e7ea99febe2.js",
+    "https://scan.chainflip.io/_next/static/chunks/279-0cd0610f97cad54e.js",
+    "https://scan.chainflip.io/_next/static/chunks/9677-998fbcf0210e078e.js",
+    "https://scan.chainflip.io/_next/static/chunks/8783-9668f29a9e138877.js",
+    "https://scan.chainflip.io/_next/static/chunks/9262-cea6d487d26693ed.js",
+    "https://scan.chainflip.io/_next/static/chunks/27-d8968d7c51526be0.js",
+    "https://scan.chainflip.io/_next/static/chunks/pages/brokers-e83a282a1a4443e6.js",
+    "https://scan.chainflip.io/_next/static/v1.10.14/_buildManifest.js",
+    "https://scan.chainflip.io/_next/static/v1.10.14/_ssgManifest.js"
+  ],
+  "js_bundle_analysis": [
+    "https://explorer-service-processor.chainflip.io/graphql",
+    "https://cache-service.chainflip.io/graphql",
+    "https://lp-service.chainflip.io/graphql",
+    "https://reporting-service.chainflip.io/graphql",
+    "/api/WagmiProvider",
+    "/api/event"
+  ],
+  "api_test_results": [
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/4795-01d3a742d36aba73.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/4795-01d3a742d36aba73.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 16529,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/pages/brokers-e83a282a1a4443e6.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/pages/brokers-e83a282a1a4443e6.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 28350,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://reporting-service.chainflip.io/graphql",
+      "url": "https://reporting-service.chainflip.io/graphql",
+      "status_code": 405,
+      "content_type": "application/json; charset=utf-8",
+      "content_length": 60,
+      "working": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/622-9fe670cb7906a106.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/622-9fe670cb7906a106.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 615082,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "/api/event",
+      "url": "https://scan.chainflip.io/api/event",
+      "status_code": 404,
+      "content_type": "text/html; charset=utf-8",
+      "content_length": 3172,
+      "working": false
+    },
+    {
+      "endpoint": "https://explorer-service-processor.chainflip.io/graphql",
+      "url": "https://explorer-service-processor.chainflip.io/graphql",
+      "status_code": 405,
+      "content_type": "application/json; charset=utf-8",
+      "content_length": 60,
+      "working": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 112541,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/pages/_app-7374aec4dd691f12.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/pages/_app-7374aec4dd691f12.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 2126774,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://lp-service.chainflip.io/graphql",
+      "url": "https://lp-service.chainflip.io/graphql",
+      "status_code": 405,
+      "content_type": "application/json; charset=utf-8",
+      "content_length": 60,
+      "working": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/webpack-6b9572cf4d34d306.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/webpack-6b9572cf4d34d306.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 5431,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://cache-service.chainflip.io/graphql",
+      "url": "https://cache-service.chainflip.io/graphql",
+      "status_code": 405,
+      "content_type": "application/json; charset=utf-8",
+      "content_length": 60,
+      "working": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/framework-5424fe5391fa8bac.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/framework-5424fe5391fa8bac.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 139997,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/9013-ee4d5e7ea99febe2.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/9013-ee4d5e7ea99febe2.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 37082,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/v1.10.14/_ssgManifest.js",
+      "url": "https://scan.chainflip.io/_next/static/v1.10.14/_ssgManifest.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 77,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "/api/WagmiProvider",
+      "url": "https://scan.chainflip.io/api/WagmiProvider",
+      "status_code": 404,
+      "content_type": "text/html",
+      "content_length": 2067,
+      "working": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/9677-998fbcf0210e078e.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/9677-998fbcf0210e078e.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 372370,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/279-0cd0610f97cad54e.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/279-0cd0610f97cad54e.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 13543,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/27-d8968d7c51526be0.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/27-d8968d7c51526be0.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 37627,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/v1.10.14/_buildManifest.js",
+      "url": "https://scan.chainflip.io/_next/static/v1.10.14/_buildManifest.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 3824,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/main-b304023043497f28.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/main-b304023043497f28.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 119711,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/8783-9668f29a9e138877.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/8783-9668f29a9e138877.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 10295,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    },
+    {
+      "endpoint": "https://scan.chainflip.io/_next/static/chunks/9262-cea6d487d26693ed.js",
+      "url": "https://scan.chainflip.io/_next/static/chunks/9262-cea6d487d26693ed.js",
+      "status_code": 200,
+      "content_type": "application/javascript",
+      "content_length": 20988,
+      "working": true,
+      "is_json": false,
+      "relevant_content": false
+    }
+  ],
+  "common_pattern_tests": [
+    {
+      "pattern": "/api/brokers",
+      "url": "https://scan.chainflip.io/api/brokers",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/api/brokers/{id}",
+      "url": "https://scan.chainflip.io/api/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/api/swaps",
+      "url": "https://scan.chainflip.io/api/swaps",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/api/transactions",
+      "url": "https://scan.chainflip.io/api/transactions",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/api/v1/brokers",
+      "url": "https://scan.chainflip.io/api/v1/brokers",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/api/v1/brokers/{id}",
+      "url": "https://scan.chainflip.io/api/v1/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/api/v1/swaps",
+      "url": "https://scan.chainflip.io/api/v1/swaps",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/api/v1/transactions",
+      "url": "https://scan.chainflip.io/api/v1/transactions",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/v1/brokers",
+      "url": "https://scan.chainflip.io/v1/brokers",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/v1/brokers/{id}",
+      "url": "https://scan.chainflip.io/v1/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/v1/swaps",
+      "url": "https://scan.chainflip.io/v1/swaps",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/v1/transactions",
+      "url": "https://scan.chainflip.io/v1/transactions",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/graphql",
+      "url": "https://scan.chainflip.io/graphql",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "pattern": "/brokers/{id}/api",
+      "url": "https://scan.chainflip.io/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi/api",
+      "status_code": 200,
+      "working": true,
+      "is_json": false
+    },
+    {
+      "pattern": "/brokers/{id}/data",
+      "url": "https://scan.chainflip.io/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi/data",
+      "status_code": 200,
+      "working": true,
+      "is_json": false
+    },
+    {
+      "pattern": "/brokers/{id}/swaps",
+      "url": "https://scan.chainflip.io/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi/swaps",
+      "status_code": 200,
+      "working": true,
+      "is_json": false
+    },
+    {
+      "pattern": "/brokers/{id}/transactions",
+      "url": "https://scan.chainflip.io/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi/transactions",
+      "status_code": 200,
+      "working": true,
+      "is_json": false
+    }
+  ]
+}

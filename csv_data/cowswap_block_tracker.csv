@@ -1,1 +1,5 @@
-chain,last_processed_block,last_processed_date,total_blocks_processed
+chain,last_processed_block,updated_at
+avalanche,30000100,2025-08-25T11:14:39.459016
+bsc,20000100,2025-08-25T11:15:39.481328
+ethereum,19011100,2025-08-25T11:31:46.010837
+base,32901000,2025-08-25T11:32:03.579917

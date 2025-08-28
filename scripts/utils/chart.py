@@ -2,8 +2,17 @@ import matplotlib.pyplot as plt
 
 # Grouped ETH family (including WETH, stETH, rETH, ETH on chains, and added WETH amounts)
 eth_family_total = (
-    21251.57 + 21238.06 + 13692.85 + 10612.66 + 7125.70 + 379.03 + 174.81 +  # previous ETH values
-    750000 + 6000 + 34000 + 21000  # new WETH + stETH amounts
+    21251.57
+    + 21238.06
+    + 13692.85
+    + 10612.66
+    + 7125.70
+    + 379.03
+    + 174.81
+    + 750000  # previous ETH values
+    + 6000
+    + 34000
+    + 21000  # new WETH + stETH amounts
 )
 
 # Grouped BTC family (WBTC + cbBTC + small WBTC from Arbitrum)
@@ -33,7 +42,7 @@ other_tokens = {
     "DOT": 119.56,
     "LUSD": 777.54,
     "DAI": 748.74,
-    "USDC (various)": 1827.72  # sum of small USDC balances (92.18 + 879.54 + 1225.93 + 334.04 + 558.53 + 78.21 + 8549.49 + 1225.83)
+    "USDC (various)": 1827.72,  # sum of small USDC balances (92.18 + 879.54 + 1225.93 + 334.04 + 558.53 + 78.21 + 8549.49 + 1225.83)
 }
 
 # Sum USDC total from listed small USDC balances
@@ -55,7 +64,7 @@ major_tokens = {
     "ATOM": other_tokens["ATOM"],
     "RUNE": other_tokens["RUNE"],
     "OP": other_tokens["OP"],
-    "Others (combined)": minor_total
+    "Others (combined)": minor_total,
 }
 
 # Labels and values for major pie chart
@@ -73,27 +82,29 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(18, 9))
 ax1.pie(
     major_values,
     labels=major_labels,
-    autopct='%1.1f%%',
+    autopct="%1.1f%%",
     startangle=140,
-    textprops=dict(color="black", fontsize=10)
+    textprops=dict(color="black", fontsize=10),
 )
-ax1.set_title('Major Portfolio Holdings', fontsize=14)
+ax1.set_title("Major Portfolio Holdings", fontsize=14)
 
 # Minor pie chart
 ax2.pie(
     minor_values,
     labels=minor_labels,
-    autopct='%1.1f%%',
+    autopct="%1.1f%%",
     startangle=140,
-    textprops=dict(color="black", fontsize=10)
+    textprops=dict(color="black", fontsize=10),
 )
-ax2.set_title('Minor Portfolio Holdings', fontsize=14)
+ax2.set_title("Minor Portfolio Holdings", fontsize=14)
 
 # Calculate total portfolio value
 total_value = sum(major_values)
 
 # Display total below the charts
-fig.text(0.5, 0.01, f'Total Portfolio Value: ${total_value:,.2f}', ha='center', fontsize=14)
+fig.text(
+    0.5, 0.01, f"Total Portfolio Value: ${total_value:,.2f}", ha="center", fontsize=14
+)
 
 plt.tight_layout(rect=[0, 0.05, 1, 1])
 plt.show()

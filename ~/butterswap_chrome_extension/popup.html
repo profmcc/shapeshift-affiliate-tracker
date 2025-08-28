@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ButterSwap Scraper</title>
+  <style>
+    body {
+      width: 350px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .controls {
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .status {
+      padding: 10px;
+      background: #f0f0f0;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+    .chain-status {
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    .chain-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      padding: 3px 0;
+    }
+    .chain-name {
+      font-weight: bold;
+    }
+    .chain-count {
+      color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>🦋 ButterSwap Scraper</h2>
+    <p>Multi-Chain Transaction Scraper</p>
+  </div>
+  
+  <div class="controls">
+    <input type="number" id="max-tx" placeholder="Max transactions per chain" value="100" min="1" max="1000">
+    
+    <button id="start-scraping">🚀 Start Multi-Chain Scraping</button>
+    <button id="stop-scraping" style="background: #f44336; display: none;">⏹️ Stop All</button>
+    <button id="export-data">📊 Export All Data</button>
+  </div>
+  
+  <div class="status" id="status">
+    Ready to scrape all chains
+  </div>
+  
+  <div class="chain-status" id="chain-status">
+    <div class="chain-item">
+      <span class="chain-name">Ethereum:</span>
+      <span class="chain-count" id="eth-count">0</span>
+    </div>
+    <div class="chain-item">
+      <span class="chain-name">Polygon:</span>
+      <span class="chain-count" id="polygon-count">0</span>
+    </div>
+    <div class="chain-item">
+      <span class="chain-name">Optimism:</span>
+      <span class="chain-count" id="optimism-count">0</span>
+    </div>
+    <div class="chain-item">
+      <span class="chain-name">Arbitrum:</span>
+      <span class="chain-count" id="arbitrum-count">0</span>
+    </div>
+    <div class="chain-item">
+      <span class="chain-name">Base:</span>
+      <span class="chain-count" id="base-count">0</span>
+    </div>
+    <div class="chain-item">
+      <span class="chain-name">Avalanche:</span>
+      <span class="chain-count" id="avalanche-count">0</span>
+    </div>
+    <div class="chain-item">
+      <span class="chain-name">BSC:</span>
+      <span class="chain-count" id="bsc-count">0</span>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

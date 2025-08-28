@@ -13,19 +13,20 @@ def quick_test():
     """Quick test of the database."""
     print("🔍 QUICK DATABASE TEST")
     print("=" * 40)
-    
+
     # Initialize database
     database = ChainflipDatabase()
-    
+
     # Show stats
     print("\n1. Database Statistics:")
     database.print_stats()
-    
+
     # Show recent transactions
     print("\n2. Recent Transactions:")
     try:
         import sqlite3
         import pandas as pd
+
         with sqlite3.connect(database.db_path) as conn:
             query = """
                 SELECT 
@@ -39,12 +40,13 @@ def quick_test():
             print(df.to_string(index=False))
     except Exception as e:
         print(f"Error querying: {e}")
-    
+
     # Show volume by currency
     print("\n3. Volume by Currency (Last 7 days):")
     try:
         import sqlite3
         import pandas as pd
+
         with sqlite3.connect(database.db_path) as conn:
             query = """
                 SELECT 
@@ -65,4 +67,4 @@ def quick_test():
 
 
 if __name__ == "__main__":
-    quick_test() 
+    quick_test()

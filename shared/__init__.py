@@ -1,1 +1,1 @@
-# Shared utilities for ShapeShift affiliate tracking 
+# Shared utilities for ShapeShift affiliate tracking

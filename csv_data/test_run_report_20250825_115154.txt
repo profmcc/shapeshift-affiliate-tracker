@@ -1,0 +1,42 @@
+================================================================================
+TEST MASTER RUNNER SUMMARY REPORT
+================================================================================
+Generated: 2025-08-25 11:51:54
+
+TEST RESULTS SUMMARY:
+----------------------------------------
+test_chainflip_listener.py: ❌ FAIL
+  - Error: Process failed with return code 2
+test_cowswap_listener.py: ✅ PASS
+  - Transactions: 0
+  - Execution time: 78.98s
+test_portals_listener.py: ✅ PASS
+  - Transactions: 0
+  - Execution time: 63.05s
+test_butterswap_listener.py: ✅ PASS
+  - Transactions: 0
+  - Execution time: 127.97s
+
+Overall: 3/4 listeners passed
+Total transactions collected: 0
+
+CSV FILES STATUS:
+----------------------------------------
+test_chainflip_transactions.csv: ✅ 3 lines, 1179 bytes
+  Sample data:
+    1. chainflip,chainflip,19000000,0x1234567890123456789012345678901234567890123456789012345678901234,1756...
+    2. chainflip,chainflip,19000001,0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890,1756...
+test_cowswap_transactions.csv: ✅ 1 lines, 370 bytes
+test_portals_transactions.csv: ✅ 1 lines, 383 bytes
+test_butterswap_transactions.csv: ✅ 1 lines, 393 bytes
+
+RECOMMENDATIONS:
+----------------------------------------
+⚠️ 1 listeners need attention:
+  - test_chainflip_listener.py: Process failed with return code 2
+⚠️ No transactions found - consider:
+  - Scanning more recent blocks
+  - Checking affiliate addresses
+  - Verifying RPC endpoints
+
+================================================================================

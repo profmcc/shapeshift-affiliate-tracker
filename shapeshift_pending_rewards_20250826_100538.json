@@ -1,0 +1,24 @@
+{
+  "queried_at": "2025-08-26T10:05:38.848711",
+  "brokers": [
+    {
+      "name": "ShapeShift Broker 1",
+      "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+      "nonce": null,
+      "total_transactions": 0,
+      "is_active": false,
+      "balance_info": null,
+      "pending_rewards": 0.0
+    },
+    {
+      "name": "ShapeShift Broker 2",
+      "address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+      "nonce": null,
+      "total_transactions": 0,
+      "is_active": false,
+      "balance_info": null,
+      "pending_rewards": 0.0
+    }
+  ],
+  "total_pending_rewards": 0
+}

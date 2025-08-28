@@ -1,0 +1,56 @@
+{
+  "queried_at": "2025-08-28T11:23:55.463075",
+  "addresses": {
+    "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi": {
+      "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+      "endpoints_tested": [
+        {
+          "url": "https://scan.chainflip.io/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+          "status": 200,
+          "content_length": 2361,
+          "balance_found": false
+        },
+        {
+          "url": "https://scan.chainflip.io/accounts/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+          "status": 404,
+          "error": "HTTP 404"
+        },
+        {
+          "url": "https://scan.chainflip.io/addresses/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+          "status": 404,
+          "error": "HTTP 404"
+        }
+      ],
+      "balance_found": false,
+      "balance": null
+    },
+    "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8": {
+      "address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+      "endpoints_tested": [
+        {
+          "url": "https://scan.chainflip.io/brokers/cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+          "status": 200,
+          "content_length": 2361,
+          "balance_found": false
+        },
+        {
+          "url": "https://scan.chainflip.io/accounts/cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+          "status": 404,
+          "error": "HTTP 404"
+        },
+        {
+          "url": "https://scan.chainflip.io/addresses/cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+          "status": 404,
+          "error": "HTTP 404"
+        }
+      ],
+      "balance_found": false,
+      "balance": null
+    }
+  },
+  "summary": {
+    "https://api.chainflip.io/health": {
+      "status": "ok"
+    }
+  }
+}

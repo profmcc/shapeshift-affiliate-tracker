@@ -6,13 +6,14 @@ from typing import Optional
 ETHERSCAN_API_KEY = "3F2DTAIMWNBEFTNKNUKJHKBKR4A9ZUW4HN"
 ETHERSCAN_API_URL = "https://api.etherscan.io/api"
 
+
 def fetch_abi(address: str, api_key: str = ETHERSCAN_API_KEY) -> Optional[str]:
     """Fetch contract ABI from Etherscan. Returns ABI JSON string or None on failure."""
     params = {
         "module": "contract",
         "action": "getabi",
         "address": address,
-        "apikey": api_key
+        "apikey": api_key,
     }
     try:
         resp = requests.get(ETHERSCAN_API_URL, params=params, timeout=10)
@@ -25,12 +26,14 @@ def fetch_abi(address: str, api_key: str = ETHERSCAN_API_KEY) -> Optional[str]:
         print(f"Request error: {e}")
     return None
 
+
 def save_abi(address: str, abi_json: str) -> None:
     """Save ABI JSON string to a file named <address>.abi.json."""
     filename = f"{address}.abi.json"
     with open(filename, "w") as f:
         f.write(abi_json)
     print(f"ABI saved to {filename}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -41,4 +44,4 @@ if __name__ == "__main__":
     if abi_json:
         save_abi(address, abi_json)
     else:
-        print("Failed to fetch ABI.") 
+        print("Failed to fetch ABI.")

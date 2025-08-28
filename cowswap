@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Quick CoW Swap Listener Alias
+# Usage: ./cowswap [command] [args]
+
+if [ $# -eq 0 ]; then
+    # No arguments - run interactive launcher
+    python run_cowswap.py
+else
+    # Pass arguments directly to the listener
+    python cowswap_listener.py "$@"
+fi
+
+

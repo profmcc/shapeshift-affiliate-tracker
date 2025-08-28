@@ -1,0 +1,255 @@
+/* Floating UI for ButterSwap Scraper */
+#butterswap-floating-scraper {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 350px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  z-index: 10000;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+#butterswap-floating-scraper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+#butterswap-floating-scraper.dragging {
+  opacity: 0.8;
+  transform: scale(1.02);
+}
+
+.bs-header {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px 20px;
+  border-radius: 15px 15px 0 0;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bs-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.bs-close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.bs-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.bs-content {
+  padding: 20px;
+}
+
+.bs-controls {
+  margin-bottom: 20px;
+}
+
+.bs-input-group {
+  margin-bottom: 15px;
+}
+
+.bs-input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.bs-input-group input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.bs-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+}
+
+.bs-button:hover {
+  transform: translateY(-1px);
+}
+
+.bs-button.primary {
+  background: #4CAF50;
+  color: white;
+}
+
+.bs-button.primary:hover {
+  background: #45a049;
+}
+
+.bs-button.danger {
+  background: #f44336;
+  color: white;
+}
+
+.bs-button.danger:hover {
+  background: #da190b;
+}
+
+.bs-button.secondary {
+  background: #2196F3;
+  color: white;
+}
+
+.bs-button.secondary:hover {
+  background: #1976D2;
+}
+
+.bs-status {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.bs-status h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bs-chain-progress {
+  margin-bottom: 15px;
+}
+
+.bs-chain-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 5px 0;
+}
+
+.bs-chain-name {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.bs-chain-count {
+  font-weight: 600;
+  color: #4CAF50;
+}
+
+.bs-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.bs-progress-fill {
+  height: 100%;
+  background: #4CAF50;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.bs-log {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 15px;
+  max-height: 120px;
+  overflow-y: auto;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 11px;
+}
+
+.bs-log-entry {
+  margin-bottom: 5px;
+  padding: 2px 0;
+}
+
+.bs-log-info { color: #4CAF50; }
+.bs-log-warning { color: #FF9800; }
+.bs-log-error { color: #f44336; }
+
+.bs-hidden {
+  display: none;
+}
+
+/* Minimize button */
+.bs-minimize-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  margin-right: 10px;
+}
+
+.bs-minimize-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Minimized state */
+#butterswap-floating-scraper.minimized {
+  width: auto;
+  height: auto;
+}
+
+#butterswap-floating-scraper.minimized .bs-content {
+  display: none;
+}
+
+#butterswap-floating-scraper.minimized .bs-header {
+  border-radius: 15px;
+  padding: 10px 15px;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  #butterswap-floating-scraper {
+    width: 300px;
+    right: 10px;
+    top: 10px;
+  }
+}
+

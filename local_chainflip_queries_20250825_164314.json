@@ -1,0 +1,40 @@
+[
+  {
+    "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+    "queried_at": "2025-08-25T16:43:10.096683",
+    "chain_head": {
+      "parentHash": "0x1b3a7829088bf7228da922ed5fa720f2fbcb866ca9e47fa18081a1a0c9bfc91a",
+      "number": "0x8e35da",
+      "stateRoot": "0xd697a68b15cfb737bc1547a642f29f46e011c2a4040dee71ccce7a057891a2bf",
+      "extrinsicsRoot": "0xd136cc30aad4e96fefdc3b962c323079dd8bb2b4f9b1e76ffed47df50e683d13",
+      "digest": {
+        "logs": [
+          "0x066175726120d728721100000000",
+          "0x05617572610101b0990a75355bc09dcc4edcd19438ca6b7a2af7f002d33a557b5818b1d76e82744045c530fc46b9ddf281794e88a10eaa498c6546344b52c9120ead1ff0d9498e"
+        ]
+      }
+    },
+    "account_info": null,
+    "storage_data": null,
+    "broker_name": "ShapeShift Broker 1"
+  },
+  {
+    "address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+    "queried_at": "2025-08-25T16:43:12.152448",
+    "chain_head": {
+      "parentHash": "0x1b3a7829088bf7228da922ed5fa720f2fbcb866ca9e47fa18081a1a0c9bfc91a",
+      "number": "0x8e35da",
+      "stateRoot": "0xd697a68b15cfb737bc1547a642f29f46e011c2a4040dee71ccce7a057891a2bf",
+      "extrinsicsRoot": "0xd136cc30aad4e96fefdc3b962c323079dd8bb2b4f9b1e76ffed47df50e683d13",
+      "digest": {
+        "logs": [
+          "0x066175726120d728721100000000",
+          "0x05617572610101b0990a75355bc09dcc4edcd19438ca6b7a2af7f002d33a557b5818b1d76e82744045c530fc46b9ddf281794e88a10eaa498c6546344b52c9120ead1ff0d9498e"
+        ]
+      }
+    },
+    "account_info": null,
+    "storage_data": null,
+    "broker_name": "ShapeShift Broker 2"
+  }
+]

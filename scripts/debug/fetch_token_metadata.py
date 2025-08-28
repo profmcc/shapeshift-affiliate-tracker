@@ -14,17 +14,36 @@ MISSING_ADDRESSES = [
     "0xc654a41e45a4e47561caae38052478d00fa64830",
     "0xf5042e6ffac5a625d4e7848e0b01373d8eb9e222",
     "0xd387c40a72703b38a5181573724bcaf2ce6038a5",
-    "0x3c2bf5c0be7be4919fae1330b748e89f165259d7"
+    "0x3c2bf5c0be7be4919fae1330b748e89f165259d7",
 ]
 
 ARBITRUM_RPC = "https://arbitrum-mainnet.infura.io/v3/208a3474635e4ebe8ee409cef3fbcd40"
 COINGECKO_API = "https://api.coingecko.com/api/v3"
 
 ERC20_ABI = [
-    {"constant":True,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"type":"function"},
-    {"constant":True,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"type":"function"},
-    {"constant":True,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"type":"function"}
+    {
+        "constant": True,
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [{"name": "", "type": "string"}],
+        "type": "function",
+    },
+    {
+        "constant": True,
+        "inputs": [],
+        "name": "name",
+        "outputs": [{"name": "", "type": "string"}],
+        "type": "function",
+    },
+    {
+        "constant": True,
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [{"name": "", "type": "uint8"}],
+        "type": "function",
+    },
 ]
+
 
 def fetch_from_coingecko(address: str) -> Dict:
     """Try to fetch token metadata from CoinGecko by contract address."""
@@ -35,25 +54,34 @@ def fetch_from_coingecko(address: str) -> Dict:
             data = resp.json()
             return {
                 "address": address,
-                "symbol": data['symbol'].upper(),
-                "name": data['name'],
-                "decimals": int(data['detail_platforms']['ethereum']['decimal_place'])
+                "symbol": data["symbol"].upper(),
+                "name": data["name"],
+                "decimals": int(data["detail_platforms"]["ethereum"]["decimal_place"]),
             }
     except Exception as e:
         print(f"  CoinGecko error for {address}: {e}")
     return {}
 
+
 def fetch_from_web3(address: str, w3: Web3) -> Dict:
     """Fallback: fetch token metadata from the blockchain via Web3."""
     try:
-        contract = w3.eth.contract(address=Web3.to_checksum_address(address), abi=ERC20_ABI)
+        contract = w3.eth.contract(
+            address=Web3.to_checksum_address(address), abi=ERC20_ABI
+        )
         symbol = contract.functions.symbol().call()
         name = contract.functions.name().call()
         decimals = contract.functions.decimals().call()
-        return {"address": address, "symbol": symbol, "name": name, "decimals": int(decimals)}
+        return {
+            "address": address,
+            "symbol": symbol,
+            "name": name,
+            "decimals": int(decimals),
+        }
     except Exception as e:
         print(f"  Web3 error for {address}: {e}")
         return {}
+
 
 def fetch_metadata(addresses: List[str]) -> List[Dict]:
     """Fetch metadata for a list of token addresses using CoinGecko, fallback to Web3."""
@@ -65,18 +93,23 @@ def fetch_metadata(addresses: List[str]) -> List[Dict]:
         if not meta:
             meta = fetch_from_web3(addr, w3)
         if meta:
-            print(f"  Found: {meta['symbol']} | {meta['name']} | decimals: {meta['decimals']}")
+            print(
+                f"  Found: {meta['symbol']} | {meta['name']} | decimals: {meta['decimals']}"
+            )
             results.append(meta)
         else:
             print(f"  Not found: {addr}")
     return results
 
+
 def print_as_json_array(tokens: List[Dict]) -> None:
     import json
+
     print(json.dumps(tokens, indent=2))
+
 
 if __name__ == "__main__":
     tokens = fetch_metadata(MISSING_ADDRESSES)
     print("\n--- JSON for tokens.json ---")
     print_as_json_array(tokens)
-    # Example usage: python fetch_token_metadata.py 
+    # Example usage: python fetch_token_metadata.py

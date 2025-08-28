@@ -1,0 +1,78 @@
+# Relay Affiliate Fee Listener - Example Configuration
+# ==================================================
+# Copy this file to config.yaml and customize for your needs
+
+# API Keys and RPC Endpoints
+# ==========================
+api:
+  alchemy_api_key: "${ALCHEMY_API_KEY}"      # Your Alchemy API key
+  infura_api_key: "${INFURA_API_KEY}"        # Optional: Infura fallback
+  coinmarketcap_api_key: "${COINMARKETCAP_API_KEY}"  # Optional: Price data
+
+# ShapeShift Affiliate Addresses
+# ==============================
+shapeshift_affiliates:
+  # Main Safe addresses for affiliate tracking
+  mainnet: "0x90A48D5CF7343B08dA12E067680B4C6dbfE551Be"      # Ethereum Mainnet
+  base: "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"         # Base
+  optimism: "0x6268d07327f4fb7380732dc6d63d95F88c0E083b"      # Optimism
+  avalanche: "0x74d63F31C2335b5b3BA7ad2812357672b2624cEd"     # Avalanche
+  polygon: "0xB5F944600785724e31Edb90F9DFa16dBF01Af000"       # Polygon
+  arbitrum: "0x38276553F8fbf2A027D901F8be45f00373d8Dd48"      # Arbitrum
+  
+  # Protocol-specific addresses
+  relay: "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"         # Relay affiliate
+  
+  # Legacy addresses found in data
+  legacy_relay: "0x2905d7e4d048d29954f81b02171dd313f457a4a4"  # Legacy Relay
+
+# Chain Configurations
+# ====================
+chains:
+  ethereum:
+    name: "Ethereum Mainnet"
+    chain_id: 1
+    rpc_url: "https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"
+    start_block: 19000000
+    chunk_size: 100
+    delay: 0.5
+    
+  base:
+    name: "Base"
+    chain_id: 8453
+    rpc_url: "https://base-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"
+    start_block: 32900000
+    chunk_size: 100
+    delay: 0.5
+
+# Protocol Configuration
+# =====================
+protocols:
+  relay:
+    contracts:
+      ethereum: "0x0000000000000000000000000000000000000000"  # Not deployed
+      base: "0xF5042e6ffaC5a625D4E7848e0b01373D8eB9e222"   # Relay router
+    
+    events:
+      affiliate_fee: "AffiliateFee(address,address,uint256,address,uint256)"
+      transfer: "Transfer(address,address,uint256)"
+    
+    listener:
+      chunk_size: 100
+      delay: 0.5
+      max_blocks: 1000
+      min_volume_usd: 0
+
+# Storage Configuration
+# ====================
+storage:
+  csv_directory: "data"
+  file_patterns:
+    relay: "relay_transactions.csv"
+    block_tracker: "{protocol}_block_tracker.csv"
+
+# Thresholds
+# ==========
+thresholds:
+  minimum_volume_usd: 0
+  minimum_fee_usd: 0

@@ -1,0 +1,123 @@
+{
+  "timestamp": "2025-08-25T16:32:56.356674",
+  "brokers": [
+    {
+      "name": "ShapeShift Broker 1",
+      "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+      "scan_result": {
+        "source": "scan.chainflip.io",
+        "url": "https://scan.chainflip.io/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+        "status": "found",
+        "content_length": 2361
+      },
+      "explorer_result": null,
+      "website_result": null
+    },
+    {
+      "name": "ShapeShift Broker 2",
+      "address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+      "scan_result": {
+        "source": "scan.chainflip.io",
+        "url": "https://scan.chainflip.io/brokers/cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+        "status": "found",
+        "content_length": 2361
+      },
+      "explorer_result": null,
+      "website_result": null
+    }
+  ],
+  "api_status": [
+    {
+      "url": "https://api.chainflip.io/health",
+      "status_code": 200,
+      "working": true
+    },
+    {
+      "url": "https://api.chainflip.io/status",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "url": "https://api.chainflip.io/brokers",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "url": "https://api.chainflip.io/swaps",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "url": "https://api.chainflip.io/transactions",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "url": "https://chainflip.io/api/health",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "url": "https://chainflip.io/api/status",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "url": "https://chainflip.io/api/brokers",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "url": "https://chainflip.io/api/swaps",
+      "status_code": 404,
+      "working": false
+    },
+    {
+      "url": "https://chainflip.io/api/transactions",
+      "status_code": 404,
+      "working": false
+    }
+  ],
+  "github_repos": [
+    {
+      "name": "chainflip-mainnet-apis",
+      "description": "Minimal Setup for running a chainflip Broker and LP APIs",
+      "url": "https://github.com/chainflip-io/chainflip-mainnet-apis",
+      "stars": 7,
+      "last_updated": "2025-05-29T04:14:00Z"
+    }
+  ],
+  "alternative_sources": [
+    {
+      "url": "https://defillama.com/protocol/chainflip",
+      "status_code": 403,
+      "accessible": false
+    },
+    {
+      "url": "https://dexscreener.com/chainflip",
+      "status_code": 403,
+      "accessible": false
+    },
+    {
+      "url": "https://dune.com/projects/chainflip",
+      "status_code": 403,
+      "accessible": false
+    }
+  ],
+  "scan_results": [
+    {
+      "source": "scan.chainflip.io",
+      "url": "https://scan.chainflip.io/brokers/cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+      "status": "found",
+      "content_length": 2361
+    },
+    {
+      "source": "scan.chainflip.io",
+      "url": "https://scan.chainflip.io/brokers/cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+      "status": "found",
+      "content_length": 2361
+    }
+  ],
+  "explorer_results": [],
+  "website_results": []
+}

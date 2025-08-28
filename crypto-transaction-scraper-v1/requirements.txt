@@ -1,0 +1,16 @@
+# Crypto Transaction Scraper Dependencies
+firecrawl-py>=0.1.0
+requests>=2.28.0
+python-dotenv>=1.0.0
+
+# Optional: Additional crypto-specific libraries
+web3>=6.0.0  # For blockchain interaction if needed
+pyyaml>=6.0  # For configuration files
+
+# Development dependencies
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=23.0.0
+ruff>=0.1.0
+mypy>=1.0.0
+

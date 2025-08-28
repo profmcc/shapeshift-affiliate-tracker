@@ -1,0 +1,27 @@
+{
+  "queried_at": "2025-08-28T11:12:01.564613",
+  "address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+  "endpoints_tested": [
+    {
+      "name": "Chainflip API Status",
+      "url": "https://api.chainflip.io/status",
+      "status": 404,
+      "error": "{\"message\":\"Route GET:/status not found\",\"error\":\"Not Found\",\"statusCode\":404}"
+    },
+    {
+      "name": "Chainflip API Transactions",
+      "url": "https://api.chainflip.io/transactions",
+      "status": 404,
+      "error": "{\"message\":\"Route GET:/transactions not found\",\"error\":\"Not Found\",\"statusCode\":404}"
+    },
+    {
+      "name": "Scan Chainflip GraphQL",
+      "url": "https://scan.chainflip.io/graphql",
+      "status": 404,
+      "error": "<!DOCTYPE html><html><head><meta charSet=\"utf-8\" data-next-head=\"\"/><meta name=\"viewport\" content=\"width=device-width\" data-next-head=\"\"/><link rel=\"icon\" href=\"/chainflip-favicon.ico\" sizes=\"any\" data-next-head=\"\"/><link rel=\"icon\" href=\"/chainflip-favicon.svg\" type=\"image/svg+xml\" data-next-head=\"\"/><link rel=\"canonical\" href=\"https://scan.chainflip.io/404\" data-next-head=\"\"/><link data-next-font=\"\" rel=\"preconnect\" href=\"/\" crossorigin=\"anonymous\"/><link rel=\"preload\" href=\"/_next/static/css/"
+    }
+  ],
+  "balance_found": false,
+  "balance": null,
+  "errors": []
+}

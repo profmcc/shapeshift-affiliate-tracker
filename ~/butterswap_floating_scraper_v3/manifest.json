@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "ButterSwap Floating Scraper v3.0",
+  "version": "3.0.0",
+  "description": "Advanced ButterSwap transaction scraper v3.0 with enhanced debugging, auto-pagination, floating UI, and comprehensive data collection",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://explorer.butterswap.io/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://explorer.butterswap.io/*"],
+      "js": ["content.js"],
+      "css": ["floating-ui.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_title": "ButterSwap Scraper v3.0"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["floating-ui.css"],
+      "matches": ["https://explorer.butterswap.io/*"]
+    }
+  ]
+}

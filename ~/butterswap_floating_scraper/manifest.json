@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "ButterSwap Floating Scraper",
+  "version": "1.0.0",
+  "description": "Floating multi-chain transaction scraper for ButterSwap explorer",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://explorer.butterswap.io/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://explorer.butterswap.io/*"],
+      "js": ["content.js"],
+      "css": ["floating-ui.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_title": "ButterSwap Floating Scraper"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
+

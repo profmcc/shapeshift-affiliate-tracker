@@ -1,0 +1,25 @@
+# Sample Crypto Transaction URLs for Testing
+# Lines starting with # are comments and will be ignored
+
+# Ethereum Mainnet Transactions
+https://etherscan.io/tx/0x0840bba848e991cdcfbf2b71b8e1cb94fb72d6343ad4bb182f7ee1c48612221d
+https://etherscan.io/tx/0x2a0b0b2b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b
+
+# Polygon Transactions
+https://polygonscan.com/tx/0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+https://polygonscan.com/tx/0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+
+# BSC Transactions
+https://bscscan.com/tx/0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+https://bscscan.com/tx/0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+
+# Arbitrum Transactions
+https://arbiscan.io/tx/0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+https://arbiscan.io/tx/0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+
+# Bitcoin Transactions (Blockchain.com)
+https://www.blockchain.com/explorer/transactions/1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234
+
+# Solana Transactions
+https://solscan.io/tx/1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+

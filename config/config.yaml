@@ -1,0 +1,174 @@
+# Relay Affiliate Fee Listener Configuration
+# =========================================
+# 
+# This configuration file provides centralized settings for:
+# - ShapeShift affiliate addresses across all chains
+# - Protocol-specific contract addresses and event signatures
+# - Chain configurations with optimized RPC settings
+# - Data structure definitions for unified cross-protocol analysis
+
+# API Keys and RPC Endpoints
+# ==========================
+# Loaded from environment variables for security
+# Priority: .env file > environment variables > config file
+api:
+  alchemy_api_key: "${ALCHEMY_API_KEY}"      # Primary RPC provider (recommended)
+  infura_api_key: "${INFURA_API_KEY}"        # Fallback RPC provider
+  coinmarketcap_api_key: "${COINMARKETCAP_API_KEY}"  # Price data (optional)
+
+# ShapeShift Affiliate Addresses
+# ==============================
+# Centralized configuration for all known affiliate addresses
+# Supports both per-address and per-chain filtering strategies
+shapeshift_affiliates:
+  # Main Safe addresses for general affiliate tracking (chain-specific)
+  mainnet: "0x90A48D5CF7343B08dA12E067680B4C6dbfE551Be"      # Ethereum Mainnet Safe
+  base: "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"         # Base Safe
+  optimism: "0x6268d07327f4fb7380732dc6d63d95F88c0E083b"      # Optimism Safe
+  avalanche: "0x74d63F31C2335b5b3BA7ad2812357672b2624cEd"     # Avalanche Safe
+  polygon: "0xB5F944600785724e31Edb90F9DFa16dBF01Af000"       # Polygon Safe
+  gnosis: "0xb0E3175341794D1dc8E5F02a02F9D26989EbedB3"        # Gnosis Chain Safe
+  bsc: "0x8b92b1698b57bEDF2142297e9397875ADBb2297E"           # Binance Smart Chain Safe
+  arbitrum: "0x38276553F8fbf2A027D901F8be45f00373d8Dd48"      # Arbitrum Safe
+  
+  # Protocol-specific addresses (overrides chain defaults)
+  relay: "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"         # Relay affiliate (Base chain)
+  
+  # Alternative/legacy addresses found in data
+  legacy_relay: "0x2905d7e4d048d29954f81b02171dd313f457a4a4"  # Found in existing relay data
+  
+  # Common variations for pattern matching
+  variations:
+    - "0x90A48D5CF7343B08dA12E067680B4C6dbfE551Be"  # Mainnet Safe
+    - "0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502"  # Base Safe
+    - "0x6268d07327f4fb7380732dc6d63d95F88c0E083b"  # Optimism Safe
+    - "0x74d63F31C2335b5b3BA7ad2812357672b2624cEd"  # Avalanche Safe
+    - "0xB5F944600785724e31Edb90F9DFa16dBF01Af000"  # Polygon Safe
+    - "0xb0E3175341794D1dc8E5F02a02F9D26989EbedB3"  # Gnosis Safe
+    - "0x8b92b1698b57bEDF2142297e9397875ADBb2297E"  # BSC Safe
+    - "0x38276553F8fbf2A027D901F8be45f00373d8Dd48"  # Arbitrum Safe
+    - "0x2905d7e4d048d29954f81b02171dd313f457a4a4"  # Legacy Relay
+    - "shapeshift"  # Text variations (case-insensitive)
+    - "ss"  # Abbreviation (common in memos)
+    - "ShapeShift"  # Capitalized variations
+    - "SHAPESHIFT"  # All caps variations
+
+# Chain Configurations
+# ====================
+# Optimized settings for each blockchain network
+# Includes RPC URLs, starting blocks, and performance tuning
+chains:
+  ethereum:
+    name: "Ethereum Mainnet"
+    chain_id: 1
+    rpc_url: "https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"
+    start_block: 19000000  # Approximate deployment of most protocols
+    chunk_size: 100        # Blocks per batch (conservative for mainnet)
+    delay: 0.5             # Seconds between batches (rate limiting)
+    reorg_window_blocks: 25  # Confirmation blocks for reorg safety
+    
+  polygon:
+    name: "Polygon PoS"
+    chain_id: 137
+    rpc_url: "https://polygon-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"
+    start_block: 50000000  # Later deployment on Polygon
+    chunk_size: 100        # Conservative for stability
+    delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
+    
+  arbitrum:
+    name: "Arbitrum One"
+    chain_id: 42161
+    rpc_url: "https://arb-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"
+    start_block: 100000000 # Much later deployment
+    chunk_size: 100        # Conservative approach
+    delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
+    
+  optimism:
+    name: "Optimism"
+    chain_id: 10
+    rpc_url: "https://opt-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"
+    start_block: 50000000  # Later deployment
+    chunk_size: 100        # Conservative for stability
+    delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
+    
+  base:
+    name: "Base"
+    chain_id: 8453
+    rpc_url: "https://base-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"
+    start_block: 32900000  # Base deployment
+    chunk_size: 100        # Conservative approach
+    delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
+    
+  avalanche:
+    name: "Avalanche C-Chain"
+    chain_id: 43114
+    rpc_url: "https://avalanche-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"
+    start_block: 30000000  # Later deployment
+    chunk_size: 100        # Conservative for stability
+    delay: 0.5             # Rate limiting
+    reorg_window_blocks: 25
+
+# Protocol-Specific Configuration
+# ===============================
+# Settings for Relay protocol monitoring
+protocols:
+  relay:
+    # Contract addresses for each chain
+    contracts:
+      ethereum: "0x0000000000000000000000000000000000000000"  # Not deployed on Ethereum
+      polygon: "0x0000000000000000000000000000000000000000"  # Not deployed on Polygon
+      arbitrum: "0x0000000000000000000000000000000000000000"  # Not deployed on Arbitrum
+      optimism: "0x0000000000000000000000000000000000000000"  # Not deployed on Optimism
+      base: "0xF5042e6ffaC5a625D4E7848e0b01373D8eB9e222"   # Relay router on Base
+      avalanche: "0x0000000000000000000000000000000000000000" # Not deployed on Avalanche
+    
+    # Event signatures for monitoring
+    events:
+      affiliate_fee: "AffiliateFee(address,address,uint256,address,uint256)"
+      transfer: "Transfer(address,address,uint256)"
+    
+    # Listener configuration
+    listener:
+      chunk_size: 100      # Blocks per batch
+      delay: 0.5           # Seconds between batches
+      max_blocks: 1000     # Maximum blocks per scan
+      min_volume_usd: 0    # Minimum volume threshold (0 = no threshold)
+
+# Data Storage Configuration
+# =========================
+# File paths and storage settings
+storage:
+  csv_directory: "data"
+  file_patterns:
+    relay: "relay_transactions.csv"
+    block_tracker: "{protocol}_block_tracker.csv"
+  
+  # Data retention settings
+  retention:
+    max_days: 365          # Keep data for 1 year
+    backup_enabled: true   # Enable automatic backups
+    backup_interval_days: 7 # Weekly backups
+
+# Thresholds and Filters
+# ======================
+# Minimum values for data inclusion
+thresholds:
+  minimum_volume_usd: 0    # Minimum transaction volume in USD
+  minimum_fee_usd: 0       # Minimum affiliate fee in USD
+  minimum_gas_used: 0      # Minimum gas usage
+  maximum_gas_price_gwei: 1000  # Maximum gas price in Gwei
+
+# Logging Configuration
+# ====================
+# Log levels and output settings
+logging:
+  level: "INFO"            # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_enabled: true       # Enable file logging
+  file_path: "logs/relay_listener.log"
+  max_file_size_mb: 10     # Maximum log file size
+  backup_count: 5          # Number of backup log files

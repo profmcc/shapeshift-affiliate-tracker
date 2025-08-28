@@ -1,0 +1,22 @@
+[
+  {
+    "broker_address": "cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi",
+    "timestamp": "2025-08-25T16:29:26.303664",
+    "broker_info": null,
+    "balance": null,
+    "recent_transactions": [],
+    "recent_swaps": [],
+    "total_volume": 0,
+    "total_fees": 0
+  },
+  {
+    "broker_address": "cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8",
+    "timestamp": "2025-08-25T16:29:29.883064",
+    "broker_info": null,
+    "balance": null,
+    "recent_transactions": [],
+    "recent_swaps": [],
+    "total_volume": 0,
+    "total_fees": 0
+  }
+]

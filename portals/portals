@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Quick Portals Listener Alias
+# Usage: ./portals [command] [args]
+
+if [ $# -eq 0 ]; then
+    # No arguments - run interactive launcher
+    python run_portals.py
+else
+    # Pass arguments directly to the listener
+    python portals_listener.py "$@"
+fi
+

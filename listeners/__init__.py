@@ -1,1 +1,1 @@
-# ShapeShift affiliate fee listeners 
+# ShapeShift affiliate fee listeners

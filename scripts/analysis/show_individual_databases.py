@@ -8,6 +8,7 @@ import os
 import sqlite3
 import pandas as pd
 
+
 def show_individual_databases():
     """
     Queries all individual protocol databases and displays their contents.
@@ -15,12 +16,12 @@ def show_individual_databases():
     print("🚀 Querying all individual databases...")
 
     db_paths = {
-        'Relay': ('databases/affiliate.db', 'relay_affiliate_fees'),
-        'Portals': ('databases/portals_transactions.db', 'portals_transactions'),
-        'THORChain': ('databases/thorchain_transactions.db', 'thorchain_transactions'),
-        'Chainflip': ('databases/chainflip_transactions.db', 'chainflip_transactions'),
-        'CowSwap': ('databases/cowswap_transactions.db', 'cowswap_transactions'),
-        '0x Protocol': ('databases/zerox_transactions.db', 'zerox_transactions'),
+        "Relay": ("databases/affiliate.db", "relay_affiliate_fees"),
+        "Portals": ("databases/portals_transactions.db", "portals_transactions"),
+        "THORChain": ("databases/thorchain_transactions.db", "thorchain_transactions"),
+        "Chainflip": ("databases/chainflip_transactions.db", "chainflip_transactions"),
+        "CowSwap": ("databases/cowswap_transactions.db", "cowswap_transactions"),
+        "0x Protocol": ("databases/zerox_transactions.db", "zerox_transactions"),
     }
 
     found_data = False
@@ -37,7 +38,9 @@ def show_individual_databases():
         try:
             # Check if table exists
             cursor = conn.cursor()
-            cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'")
+            cursor.execute(
+                f"SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'"
+            )
             if cursor.fetchone() is None:
                 print(f"Table '{table_name}' not found.")
                 continue
@@ -56,5 +59,6 @@ def show_individual_databases():
     if not found_data:
         print("\n❌ No data was found in any of the databases.")
 
+
 if __name__ == "__main__":
-    show_individual_databases() 
+    show_individual_databases()
