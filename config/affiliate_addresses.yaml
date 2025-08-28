@@ -1,81 +1,89 @@
-# ShapeShift Affiliate Address Registry
-# This file contains all known affiliate addresses across different protocols and chains
-# Used for on-chain fee validation and auditing
+# ShapeShift Affiliate Tracker - Affiliate Address Registry
+# This file contains all known affiliate addresses across protocols and chains
+# Used for validation, auditing, and on-chain fee verification
 
-# Protocol: CoW Swap
+# Last updated: August 28, 2025
+# Maintainer: ShapeShift DAO Team
+
+# CoW Swap Protocol
 cowswap:
   ethereum:
     affiliate_address: "0x2a79a3c28fc49447b6d3f89d2a2bfb91e7b6976a"
     status: "active"
-    description: "Main Ethereum affiliate address for CoW Swap"
     last_verified: "2025-08-28"
-    
+    notes: "Primary CoW Swap affiliate address on Ethereum mainnet"
+  
   gnosis:
     affiliate_address: "0xd1d6040d9b905f4a83e6b6d2a6a09f2f5f2f3d06"
     status: "active"
-    description: "Gnosis chain affiliate address for CoW Swap"
     last_verified: "2025-08-28"
+    notes: "CoW Swap affiliate address on Gnosis chain"
 
-# Protocol: Portals
+# Portals Protocol
 portals:
   ethereum:
     affiliate_address: "0x4d8cEdeB69466299e27A7f2C3eB7d5d23d846F9d"
     status: "active"
-    description: "Ethereum affiliate address for Portals (leverages CoW Swap)"
     last_verified: "2025-08-28"
+    notes: "Portals affiliate address, leverages CoW Swap listener design"
 
-# Protocol: Relay
+# Relay Protocol
 relay:
   ethereum:
     affiliate_address: "0x0a7a93ae54c3a44a471a65f7a6d47671e3f6c43d"
     status: "active"
-    description: "Ethereum affiliate address for Relay protocol"
     last_verified: "2025-08-28"
-    
+    notes: "Relay affiliate address on Ethereum mainnet"
+  
   base:
     affiliate_address: "0x8f6226D2D5f29367dC1bA53C70c58d23992b77b9"
     status: "active"
-    description: "Base chain affiliate address for Relay protocol"
     last_verified: "2025-08-28"
+    notes: "Relay affiliate address on Base chain"
 
-# Protocol: ButterSwap
+# ButterSwap Protocol
 butterswap:
   base:
     affiliate_address: "0x9A7fC46A6932CDe0A1Ab74e36bE1b6d8E6AFA1F2"
     status: "active"
-    description: "Base chain affiliate address for ButterSwap"
     last_verified: "2025-08-28"
+    notes: "ButterSwap affiliate address on Base chain, transactions run through main Base treasury (0x9c9aA90363630d4ab1D9dbF416cc3BBC8d3Ed502)"
 
-# Protocol: THORChain (Future Integration)
+# Future Protocol Integrations
+# These are placeholder addresses for protocols we plan to support
+
+# THORChain (placeholder)
 thorchain:
   ethereum:
     affiliate_address: "TBD"
     status: "planned"
-    description: "Ethereum affiliate address for THORChain (to be implemented)"
     last_verified: "TBD"
+    notes: "THORChain integration planned for Q4 2025"
 
-# Protocol: Chainflip (Future Integration)
+# Chainflip (placeholder)
 chainflip:
   ethereum:
     affiliate_address: "TBD"
     status: "planned"
-    description: "Ethereum affiliate address for Chainflip (to be implemented)"
     last_verified: "TBD"
+    notes: "Chainflip integration planned for Q4 2025"
 
-# Protocol: 0x (Future Integration)
+# 0x Protocol (placeholder)
 zerox:
   ethereum:
     affiliate_address: "TBD"
     status: "planned"
-    description: "Ethereum affiliate address for 0x protocol (to be implemented)"
     last_verified: "TBD"
+    notes: "0x Protocol integration planned for Q4 2025"
 
-# Global Configuration
-global:
+# Configuration Metadata
+metadata:
+  version: "1.0.0"
+  last_updated: "2025-08-28"
+  maintainer: "ShapeShift DAO Team"
+  validation_script: "scripts/validate_addresses.py"
   update_frequency: "weekly"
-  verification_method: "on-chain_validation"
-  backup_addresses: []
   notes: |
-    This registry should be updated whenever new affiliate addresses are deployed
-    or when existing addresses are rotated. All addresses should be verified
-    on-chain before being marked as active.
+    This registry should be updated whenever new affiliate addresses are discovered
+    or when existing addresses change. All addresses should be verified on-chain
+    before being marked as active.
